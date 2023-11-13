@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.example.posingottae.ui.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/navigation_poseanalysis"
+        android:name="com.example.posingottae.ui.poseanalysis.PoseFragment"
+        android:label="@string/title_poseanalyze"
+        tools:layout="@layout/fragment_pose" />
+
+    <fragment
+        android:id="@+id/navigation_map"
+        android:name="com.example.posingottae.ui.map.MapFragment"
+        android:label="@string/title_map"
+        tools:layout="@layout/fragment_map"/>
+
+
+    <fragment
+        android:id="@+id/navigation_socialmedia"
+        android:name="com.example.posingottae.ui.socialmedia.SocialFragment"
+        android:label="@string/title_socialmedia"
+        tools:layout="@layout/fragment_social" />
+
+    <fragment
+        android:id="@+id/navigation_mypage"
+        android:name="com.example.posingottae.ui.mypage.MypageFragment"
+        android:label="@string/title_mypage"
+        tools:layout="@layout/fragment_mypage"/>
+
+
+</navigation>
