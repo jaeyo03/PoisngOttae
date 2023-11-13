@@ -10,6 +10,9 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        // Naver Maps
+        maven("https://naver.jfrog.io/artifactory/maven/")
+
     }
 }
 

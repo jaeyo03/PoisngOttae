@@ -35,7 +35,7 @@ private val pickImageLauncher = registerForActivityResult(ActivityResultContract
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(setOf(
-            R.id.navigation_home, R.id.navigation_poseanalysis, R.id.navigation_socialmedia))
+            R.id.navigation_home, R.id.navigation_poseanalysis, R.id.navigation_socialmedia ,R.id.navigation_map,R.id.navigation_mypage))
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
@@ -52,6 +52,5 @@ private val pickImageLauncher = registerForActivityResult(ActivityResultContract
                     }
                 }.show()
         }
-            //ffff
     }
 }
