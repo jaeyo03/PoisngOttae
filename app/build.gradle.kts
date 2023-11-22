@@ -35,6 +35,7 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        mlModelBinding = true
     }
 }
 
@@ -48,10 +49,24 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.5")
     implementation("androidx.navigation:navigation-ui-ktx:2.7.5")
+    implementation("org.tensorflow:tensorflow-lite-metadata:0.1.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+
     // Naver Maps
     implementation("com.naver.maps:map-sdk:3.17.0")
-    
+
+    // Pose Detection ML Kit
+    implementation("com.google.mlkit:pose-detection-accurate:18.0.0-beta3")
+
+    // androidx Camera
+    implementation ("androidx.camera:camera-core:1.1.0")
+    implementation ("androidx.camera:camera-view:1.1.0")
+    implementation ("androidx.camera:camera-camera2:1.1.0")
+    implementation ("androidx.camera:camera-lifecycle:1.1.0")
+    implementation ("androidx.camera:camera-extensions:1.1.0")
+    //아래는 비디오. 필요 없을수도 있음
+    implementation ("androidx.camera:camera-video:1.1.0")
+
 }
