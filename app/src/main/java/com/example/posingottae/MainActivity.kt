@@ -1,13 +1,10 @@
 package com.example.posingottae
 
-import android.Manifest
-import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.PermissionChecker
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -15,7 +12,8 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.posingottae.databinding.ActivityMainBinding
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-class MainActivity : AppCompatActivity() {
+
+class MainActivity : AppCompatActivity(){
 
 private lateinit var binding: ActivityMainBinding
 
@@ -55,7 +53,10 @@ private val pickImageLauncher = registerForActivityResult(ActivityResultContract
                     }
                 }.show()
         }
+
+
     }
 
 
 }
+
