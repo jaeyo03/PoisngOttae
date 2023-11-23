@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">PosingOttae</string>
     <string name="title_home">Home</string>
-    <string name="title_poseanalyze">Pose Analysis</string>
+    <string name="title_poseanalyze">Pose</string>
     <string name="title_map">Near Gym</string>
     <string name="title_socialmedia">Social Media</string>
     <string name="title_mypage">My Page</string>
