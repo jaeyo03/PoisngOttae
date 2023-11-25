@@ -3,10 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-feature android:name="android.hardware.camera.any" />
+
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-        android:maxSdkVersion="28" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="28" /> <!-- jinsoo -->
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -19,17 +22,35 @@
         android:theme="@style/Theme.PosingOttae"
         tools:targetApi="31">
         <activity
+            android:name=".login.Login"
+            android:exported="true"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".login.SignUp"
+            android:exported="false"
+            android:label="@string/app_name"
+            android:parentActivityName=".login.Login"> <!-- 이 meta-data 태그는 뒤로가기 버튼을 처리하기 위한 것입니다. -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".login.Login" />
+        </activity>
+        <activity
             android:name=".cameraActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
 
         <meta-data

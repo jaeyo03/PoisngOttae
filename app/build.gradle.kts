@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -49,6 +50,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.5")
     implementation("androidx.navigation:navigation-ui-ktx:2.7.5")
+    implementation("com.google.firebase:firebase-auth:22.3.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
@@ -68,4 +70,9 @@ dependencies {
     //아래는 비디오. 필요 없을수도 있음
     implementation ("androidx.camera:camera-video:1.1.0")
 
+    //FireBase 설정 - Jinsoo
+    implementation(platform("com.google.firebase:firebase-bom:32.6.0"))
+    implementation("com.google.firebase:firebase-auth-ktx:22.3.0")
+    implementation("com.google.firebase:firebase-analytics")
+    implementation("com.google.firebase:firebase-core:21.1.0")
 }
