@@ -34,8 +34,8 @@ private var _binding: FragmentPoseBinding? = null
           textView.text = it
         }
 
-        val btn2 = binding.goPose
-        btn2.setOnClickListener {
+        val goPose = binding.goPose
+        goPose.setOnClickListener {
             startActivity(Intent(activity,cameraActivity::class.java))
         }
         return root

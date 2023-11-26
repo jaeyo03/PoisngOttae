@@ -78,9 +78,15 @@ class cameraActivity : AppCompatActivity() {
 
 
         // Set up the listeners for take photo
-        viewBinding.imageCaptureButton.setOnClickListener { takePhoto() }
+        viewBinding.imageCaptureButton.setOnClickListener {
+            takePhoto()
+            val intent = Intent(this, ResultActivity::class.java)
+            startActivity(intent)
+        }
         viewBinding.galleryButton.setOnClickListener {
             openGalleryForImage()
+            val intent = Intent(this, ResultActivity::class.java)
+            startActivity(intent)
         }
         cameraExecutor = Executors.newSingleThreadExecutor()
 
@@ -152,6 +158,9 @@ class cameraActivity : AppCompatActivity() {
 
             // Image Capture
             imageCapture = ImageCapture.Builder().build()
+                .also {
+                    cameraActivity.CameraAnalyzer(poseDetector,onPoseDetected)
+                }
 
 //            val imageAnalyzer = ImageAnalysis.Builder()
 //                .build()
