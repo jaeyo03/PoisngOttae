@@ -8,6 +8,7 @@
     tools:context=".MainActivity">
 
     <ImageView
+        android:id="@+id/splashImageView"
         android:layout_width="249dp"
         android:layout_height="296dp"
         android:layout_marginTop="216dp"

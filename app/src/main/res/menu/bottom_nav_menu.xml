@@ -19,7 +19,7 @@
     <item
         android:id="@+id/navigation_socialmedia"
         android:icon="@drawable/ic_chat_24"
-        android:title="@string/title_socialmedia" />
+        android:title="@string/title_social" />
 
 
     <item

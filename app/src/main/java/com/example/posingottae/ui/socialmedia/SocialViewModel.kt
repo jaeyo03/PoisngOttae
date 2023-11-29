@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 class SocialViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is Social Fragment"
+        value = "This is Chatting Fragment"
     }
     val text: LiveData<String> = _text
 }

@@ -1,7 +1,5 @@
 package com.example.posingottae
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -10,30 +8,30 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
+import android.os.Bundle
 import android.provider.MediaStore
-import androidx.camera.core.ImageCapture
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import java.util.concurrent.ExecutorService
-import java.util.concurrent.Executors
-import android.widget.Toast
-import androidx.camera.lifecycle.ProcessCameraProvider
-import androidx.camera.core.Preview
-import androidx.camera.core.CameraSelector
 import android.util.Log
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageAnalysis
+import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.ImageProxy
-import androidx.core.content.PermissionChecker
+import androidx.camera.core.Preview
+import androidx.camera.lifecycle.ProcessCameraProvider
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.example.posingottae.databinding.ActivityCameraBinding
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.pose.Pose
 import com.google.mlkit.vision.pose.PoseDetection
 import com.google.mlkit.vision.pose.PoseDetector
 import com.google.mlkit.vision.pose.accurate.AccuratePoseDetectorOptions
-import java.nio.ByteBuffer
 import java.text.SimpleDateFormat
 import java.util.Locale
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executors
 
 typealias LumaListener = (luma: Double) -> Unit
 
@@ -42,6 +40,7 @@ class cameraActivity : AppCompatActivity() {
 
     private var imageCapture: ImageCapture? = null
     private lateinit var cameraExecutor: ExecutorService
+
 
     // 포즈 인식 클라이언트에 적용되는 옵션. 이미지 분석 -> SINGLE_IMAGE_MODE
     val options by lazy {
@@ -56,9 +55,45 @@ class cameraActivity : AppCompatActivity() {
         PoseDetection.getClient(options)
     }
 
+    val bodyPoints = mutableMapOf<String, Double>(
+        "NOSE_X" to 0.0, "NOSE_Y" to 0.0,
+        "LEFT_EYE_INNER_X" to 0.0, "LEFT_EYE_INNER_Y" to 0.0,
+        "LEFT_EYE_X" to 0.0, "LEFT_EYE_Y" to 0.0,
+        "LEFT_EYE_OUTER_X" to 0.0, "LEFT_EYE_OUTER_Y" to 0.0,
+        "RIGHT_EYE_INNER_X" to 0.0, "RIGHT_EYE_INNER_Y" to 0.0,
+        "RIGHT_EYE_X" to 0.0, "RIGHT_EYE_Y" to 0.0,
+        "RIGHT_EYE_OUTER_X" to 0.0, "RIGHT_EYE_OUTER_Y" to 0.0,
+        "LEFT_EAR_X" to 0.0, "LEFT_EAR_Y" to 0.0,
+        "RIGHT_EAR_X" to 0.0, "RIGHT_EAR_Y" to 0.0,
+        "LEFT_MOUTH_X" to 0.0, "LEFT_MOUTH_Y" to 0.0,
+        "RIGHT_MOUTH_X" to 0.0, "RIGHT_MOUTH_Y" to 0.0,
+        "LEFT_SHOULDER_X" to 0.0, "LEFT_SHOULDER_Y" to 0.0,
+        "RIGHT_SHOULDER_X" to 0.0, "RIGHT_SHOULDER_Y" to 0.0,
+        "LEFT_ELBOW_X" to 0.0, "LEFT_ELBOW_Y" to 0.0,
+        "RIGHT_ELBOW_X" to 0.0, "RIGHT_ELBOW_Y" to 0.0,
+        "LEFT_WRIST_X" to 0.0, "LEFT_WRIST_Y" to 0.0,
+        "RIGHT_WRIST_X" to 0.0, "RIGHT_WRIST_Y" to 0.0,
+        "LEFT_PINKY_X" to 0.0, "LEFT_PINKY_Y" to 0.0,
+        "RIGHT_PINKY_X" to 0.0, "RIGHT_PINKY_Y" to 0.0,
+        "LEFT_INDEX_X" to 0.0, "LEFT_INDEX_Y" to 0.0,
+        "RIGHT_INDEX_X" to 0.0, "RIGHT_INDEX_Y" to 0.0,
+        "LEFT_THUMB_X" to 0.0, "LEFT_THUMB_Y" to 0.0,
+        "RIGHT_THUMB_X" to 0.0, "RIGHT_THUMB_Y" to 0.0,
+        "LEFT_HIP_X" to 0.0, "LEFT_HIP_Y" to 0.0,
+        "RIGHT_HIP_X" to 0.0, "RIGHT_HIP_Y" to 0.0,
+        "LEFT_KNEE_X" to 0.0, "LEFT_KNEE_Y" to 0.0,
+        "RIGHT_KNEE_X" to 0.0, "RIGHT_KNEE_Y" to 0.0,
+        "LEFT_ANKLE_X" to 0.0, "LEFT_ANKLE_Y" to 0.0,
+        "RIGHT_ANKLE_X" to 0.0, "RIGHT_ANKLE_Y" to 0.0,
+        "LEFT_HEEL_X" to 0.0, "LEFT_HEEL_Y" to 0.0,
+        "RIGHT_HEEL_X" to 0.0, "RIGHT_HEEL_Y" to 0.0,
+        "LEFT_FOOT_INDEX_X" to 0.0, "LEFT_FOOT_INDEX_Y" to 0.0,
+        "RIGHT_FOOT_INDEX_X" to 0.0, "RIGHT_FOOT_INDEX_Y" to 0.0
+    )
+
     // CameraX 이미지를 분석후, Landmark(좌표값)을 리턴해준다. 좌표값은 pose에 담겨있다.
     val onPoseDetected: (pose: Pose) -> Unit = { pose ->
-        Log.d("PoseInfo", pose.toString())
+
     }
 
 
@@ -80,13 +115,17 @@ class cameraActivity : AppCompatActivity() {
         // Set up the listeners for take photo
         viewBinding.imageCaptureButton.setOnClickListener {
             takePhoto()
-            val intent = Intent(this, ResultActivity::class.java)
-            startActivity(intent)
+//            val intent = Intent(this, ResultActivity::class.java)
+//            intent.apply {
+//                putExtra("PoseInfo" , bodyPoints.toString())
+//            }
+//            startActivity(intent)
         }
         viewBinding.galleryButton.setOnClickListener {
             openGalleryForImage()
-            val intent = Intent(this, ResultActivity::class.java)
-            startActivity(intent)
+
+//            val intent = Intent(this, ResultActivity::class.java)
+//            startActivity(intent)
         }
         cameraExecutor = Executors.newSingleThreadExecutor()
 
@@ -214,8 +253,15 @@ class cameraActivity : AppCompatActivity() {
                     val landmarkType = landmark.landmarkType
                     val position = landmark.position
                     Log.d("PoseInfo", "Type: $landmarkType, x: ${position.x}, y: ${position.y}")
+                    // 여기서 landmarkType은 그냥 0~32 까지의 숫자로만 나옴
+                    val bodyX = "${landmarkType}_X"
+                    val bodyY = "${landmarkType}_Y"
+
+                    bodyPoints.put(bodyX , position.x.toDouble())
+                    bodyPoints.put(bodyY, position.y.toDouble())
+
+                    Log.d("BodyPoint",bodyPoints.toString())
                 }
-                Log.d("PoseInfo", pose.toString())
                 // 여기서 pose 처리
             }
             .addOnFailureListener { e ->
@@ -289,3 +335,4 @@ class cameraActivity : AppCompatActivity() {
             }.toTypedArray()
     }
 }
+

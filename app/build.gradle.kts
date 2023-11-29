@@ -79,6 +79,7 @@ dependencies {
     implementation("com.google.firebase:firebase-auth-ktx:22.3.0")
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-core:21.1.0")
+    // 구글 로그인 설정 - Jinsoo
     implementation("com.google.android.gms:play-services-auth:20.7.0")
 
     //언선 Implementation

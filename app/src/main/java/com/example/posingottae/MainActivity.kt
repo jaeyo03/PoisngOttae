@@ -53,7 +53,6 @@ class MainActivity : AppCompatActivity(){
 //                }.show()
 //        }
         setFABClickEvent()
-
     }
 
     private fun setFABClickEvent() {

@@ -27,7 +27,7 @@
     <fragment
         android:id="@+id/navigation_socialmedia"
         android:name="com.example.posingottae.ui.socialmedia.SocialFragment"
-        android:label="@string/title_socialmedia"
+        android:label="@string/title_social"
         tools:layout="@layout/fragment_social" />
 
     <fragment

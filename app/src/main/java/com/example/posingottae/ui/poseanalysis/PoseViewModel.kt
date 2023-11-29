@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 class PoseViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is Pose Fragment"
+        value = "Choose what pose do you want to follow!"
     }
     val text: LiveData<String> = _text
 }
