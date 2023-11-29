@@ -99,12 +99,14 @@ class Login : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-            // 구글 승인 정보 가져오기
+        // 구글 승인 정보 가져오기
         if (requestCode == GOOGLE_LOGIN_CODE && resultCode == Activity.RESULT_OK) {
             val result = Auth.GoogleSignInApi.getSignInResultFromIntent(data!!)
             if (result?.isSuccess == true) {
                 val account = result.signInAccount
-                firebaseAuthWithGoogle(account!!)
+                if (account != null) {
+                    firebaseAuthWithGoogle(account)
+                }
             }
         }
     }
@@ -115,8 +117,7 @@ class Login : AppCompatActivity() {
             ?.addOnCompleteListener {task ->
                 if (task.isSuccessful) {
                     // 다음 페이지 호출
-                    Toast.makeText(this, "login success", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this, MainActivity::class.java))
+                    moveMainPage(auth?.currentUser)
                 } else {
                     startActivity(Intent(this, MainActivity::class.java))
                 }
@@ -125,16 +126,17 @@ class Login : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        val currentUser = auth?.currentUser
-        if (currentUser != null){
-
+        // 자동 로그인
+/*        moveMainPage(auth?.currentUser)*/
+    }
+    fun moveMainPage(user: FirebaseUser?) {
+        // 유저가 로그인함
+        Log.d("Log in", "$user")
+        if (user != null) {
             Toast.makeText(this, "login success", Toast.LENGTH_SHORT).show()
             startActivity(Intent(this, MainActivity::class.java))
-        }
-        else{
-            startActivity(Intent(this, Login::class.java))
+            finish()
         }
     }
-
 
 }
