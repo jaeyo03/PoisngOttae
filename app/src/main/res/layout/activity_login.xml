@@ -52,13 +52,21 @@
         android:layout_marginTop="10dp"
         app:layout_constraintTop_toBottomOf="@+id/emailLogin"/>
     <Button
-        android:text="Click to Sign Up"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/signUpBtn"
-        android:layout_marginTop="12dp"
-        app:layout_constraintTop_toBottomOf="@+id/loginBtn" android:layout_marginEnd="121dp"
-        app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="121dp"/>
+            android:text="Click to Sign Up"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/signUpBtn"
+            android:layout_marginEnd="121dp"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="121dp" app:layout_constraintHorizontal_bias="0.0"
+            android:layout_marginTop="20dp" app:layout_constraintTop_toBottomOf="@+id/googleBtn"/>
+<!--    <com.google.android.gms.common.SignInButton 이걸로 하면 앱이 실행이 안도미-->
+    <Button
+            android:text="Google Login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/googleBtn"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="121dp"
+            android:layout_marginEnd="121dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="20dp"
+            app:layout_constraintTop_toBottomOf="@+id/loginBtn"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
