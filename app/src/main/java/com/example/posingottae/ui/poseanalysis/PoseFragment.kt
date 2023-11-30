@@ -8,15 +8,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.Spinner
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.posingottae.R
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import androidx.viewpager2.widget.ViewPager2
 import com.example.posingottae.cameraActivity
 import com.example.posingottae.databinding.FragmentPoseBinding
+
 
 class PoseFragment : Fragment() {
 
@@ -30,7 +30,6 @@ private var _binding: FragmentPoseBinding? = null
     savedInstanceState: Bundle?
     ): View {
         val poseViewModel = ViewModelProvider(this).get(PoseViewModel::class.java)
-
         _binding = FragmentPoseBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
@@ -40,9 +39,15 @@ private var _binding: FragmentPoseBinding? = null
           textView.text = it
         }
 
+        // ViewPage Adapter를 먼저 설정
+        val pageNum = 4
+        val myPager = binding.poseViewPager
+        val pagerAdapter = PagerAdapter(this,pageNum)
+        myPager.adapter = pagerAdapter
+
         val poses = arrayOf("Choose Pose!" ,"Front","Back","Side","Muscular")
         val poseSpinner : Spinner = binding.choosePoseSpinner
-        val poseImageContainer = binding.imageContainer
+
 
         poseSpinner.adapter = ArrayAdapter(requireContext(),android.R.layout.simple_spinner_dropdown_item,poses)
         poseSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
@@ -52,7 +57,11 @@ private var _binding: FragmentPoseBinding? = null
                 position: Int,
                 id: Long
             ) {
-                updateImages(poseImageContainer ,poses[position] )
+                val choosedPose = poses[position]
+                val newPagerAdapter = PagerAdapter(this@PoseFragment, pageNum)
+                newPagerAdapter.setFragments(choosedPose)
+                myPager.adapter = newPagerAdapter
+
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -60,6 +69,33 @@ private var _binding: FragmentPoseBinding? = null
             }
 
         }
+
+
+        // Indicator 설정 , 동그라미 생기는거
+        val rIndicator = binding.indicatorRound
+        rIndicator.setViewPager(myPager)
+        rIndicator.createIndicators(pageNum,0)
+
+        myPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+
+        myPager.currentItem = 0 // 시작 지점
+        myPager.offscreenPageLimit = 4 // 최대 이미지 수
+
+        myPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+                super.onPageScrolled(position, positionOffset, positionOffsetPixels)
+                if (positionOffsetPixels == 0) {
+                    myPager.currentItem = position
+                }
+            }
+
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                rIndicator.animatePageSelected(position % pageNum)
+            }
+        })
+
+
         val goPose = binding.goPose
         goPose.setOnClickListener {
             startActivity(Intent(activity,cameraActivity::class.java))
@@ -67,37 +103,7 @@ private var _binding: FragmentPoseBinding? = null
         return root
     }
 
-    private fun updateImages(container: LinearLayout, category: String) {
-        container.removeAllViews() // 기존 이미지 삭제
 
-        val images = getImagesForCategory(category) // 카테고리에 따른 이미지 가져오기
-
-        val imageParmas = LinearLayout.LayoutParams(
-            LinearLayout.LayoutParams.WRAP_CONTENT,
-            LinearLayout.LayoutParams.WRAP_CONTENT
-        ).apply {
-            setMargins(8,0,8,0)
-        }
-
-        for (image in images) {
-            val imageView = ImageView(requireContext())
-            imageView.layoutParams = imageParmas
-            imageView.setImageResource(image)
-            container.addView(imageView)
-        }
-    }
-
-    private fun getImagesForCategory(category: String): List<Int> {
-        // 여기서 카테고리에 따라 이미지의 리소스 ID 목록을 반환합니다.
-        // 예를 들어, 팔 동작 이미지의 리소스 ID를 리스트로 반환
-        return when (category) {
-            "Front" -> listOf(R.drawable.pose_front_spread, R.drawable.pose_front_double_biceps,R.drawable.pose_line_up,R.drawable.pose_abdominal)
-            "Back" -> listOf(R.drawable.pose_back_double, R.drawable.pose_back_lat)
-            "Side" -> listOf(R.drawable.pose_side_chest)
-            "Muscular" -> listOf(R.drawable.pose_most_muscular,R.drawable.pose_most_muscular2)
-            else -> emptyList()
-        }
-    }
 override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -105,3 +111,6 @@ override fun onDestroyView() {
 
 
 }
+
+
+

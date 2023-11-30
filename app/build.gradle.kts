@@ -95,4 +95,9 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
     implementation("com.github.kittinunf.fuel:fuel:2.3.1")
 
+    //ViewPager 용 implementation
+    implementation("androidx.viewpager2:viewpager2:1.0.0")
+    implementation("me.relex:circleindicator:2.1.6")
+
+
 }
