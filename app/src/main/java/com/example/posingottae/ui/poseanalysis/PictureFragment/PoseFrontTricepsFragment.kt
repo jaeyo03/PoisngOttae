@@ -4,16 +4,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import com.example.posingottae.R
 
-class PoseBackdbFragment : Fragment(){
+class PoseFrontTricepsFragment : Fragment(){
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         return inflater.inflate(
-            R.layout.pose_back_double, container, false
+            R.layout.pose_front_triceps, container, false
         )
     }
 }

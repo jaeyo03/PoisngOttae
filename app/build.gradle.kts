@@ -99,5 +99,7 @@ dependencies {
     implementation("androidx.viewpager2:viewpager2:1.0.0")
     implementation("me.relex:circleindicator:2.1.6")
 
+    //위치 추적
+    implementation("com.google.android.gms:play-services-location:21.0.1")
 
 }

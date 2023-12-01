@@ -11,7 +11,8 @@
         android:maxSdkVersion="28" /> <!-- jinsoo -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
+    <!-- 실시간 위치 추적을 위한 퍼미션-->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -54,7 +55,7 @@
             android:name=".cameraActivity"
             android:exported="false" />
         <activity
-            android:name=".ResultActivity"
+            android:name=".ui.poseanalysis.ResultActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

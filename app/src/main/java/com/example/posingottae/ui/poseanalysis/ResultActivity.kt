@@ -1,4 +1,4 @@
-package com.example.posingottae
+package com.example.posingottae.ui.poseanalysis
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

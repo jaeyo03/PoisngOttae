@@ -3,6 +3,7 @@ package com.example.posingottae.ui.poseanalysis
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -81,6 +82,8 @@ private var _binding: FragmentPoseBinding? = null
         myPager.currentItem = 0 // 시작 지점
         myPager.offscreenPageLimit = 4 // 최대 이미지 수
 
+        var fragmentInfo = ""
+
         myPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
                 super.onPageScrolled(position, positionOffset, positionOffsetPixels)
@@ -95,10 +98,11 @@ private var _binding: FragmentPoseBinding? = null
             }
         })
 
-
         val goPose = binding.goPose
         goPose.setOnClickListener {
-            startActivity(Intent(activity,cameraActivity::class.java))
+            val intent = Intent(activity,cameraActivity::class.java)
+            intent.putExtra("selectedPhotoID",fragmentInfo)
+            startActivity(intent)
         }
         return root
     }

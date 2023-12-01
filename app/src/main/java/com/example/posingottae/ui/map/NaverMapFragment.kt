@@ -11,9 +11,11 @@ import com.example.posingottae.R
 import com.example.posingottae.databinding.FragmentMapBinding
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.CameraPosition
+import com.naver.maps.map.LocationTrackingMode
 import com.naver.maps.map.MapFragment
 import com.naver.maps.map.NaverMap
 import com.naver.maps.map.OnMapReadyCallback
+import com.naver.maps.map.util.FusedLocationSource
 
 
 class NaverMapFragment : Fragment(), OnMapReadyCallback {
@@ -22,7 +24,8 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-
+    private lateinit var locationSource: FusedLocationSource
+    private lateinit var naverMap: NaverMap
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -34,7 +37,38 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback {
             }
 
         mapFragment.getMapAsync(this)
+        locationSource = FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE)
     }
+
+    override fun onRequestPermissionsResult(requestCode: Int,
+                                            permissions: Array<String>,
+                                            grantResults: IntArray) {
+        if (locationSource.onRequestPermissionsResult(requestCode, permissions,
+                grantResults)) {
+            if (!locationSource.isActivated) { // 권한 거부됨
+                naverMap.locationTrackingMode = LocationTrackingMode.None
+            }
+            return
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+    }
+
+    // 네이버 지도의 옵션 관련 행동은 모두 여기서 진행
+    override fun onMapReady(naverMap: NaverMap) {
+        this.naverMap = naverMap
+        naverMap.locationSource = locationSource
+        val cameraPosition = CameraPosition(
+            LatLng(33.38, 126.55),  // 위치 지정
+            9.0 // 줌 레벨
+        )
+        naverMap.cameraPosition = cameraPosition
+
+        val uiSettings = naverMap.uiSettings
+        uiSettings.isCompassEnabled = true
+        uiSettings.isLocationButtonEnabled =true //위치에서 뭘더 조정해야 제대로 작동..
+        uiSettings.isScaleBarEnabled = true
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -59,17 +93,8 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback {
         _binding = null
     }
 
-    // 네이버 지도의 옵션 관련 행동은 모두 여기서 진행
-    override fun onMapReady(naverMap: NaverMap) {
-        val cameraPosition = CameraPosition(
-            LatLng(33.38, 126.55),  // 위치 지정
-            9.0 // 줌 레벨
-        )
-        naverMap.cameraPosition = cameraPosition
 
-        val uiSettings = naverMap.uiSettings
-        uiSettings.isCompassEnabled = true
-        uiSettings.isLocationButtonEnabled =true //위치에서 뭘더 조정해야 제대로 작동..
-        uiSettings.isScaleBarEnabled = true
+    companion object {
+        private const val LOCATION_PERMISSION_REQUEST_CODE = 1000
     }
 }
