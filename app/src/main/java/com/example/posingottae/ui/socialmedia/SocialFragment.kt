@@ -6,40 +6,63 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import com.example.posingottae.databinding.FragmentSocialBinding
+
+import com.example.posingottae.R
+
 
 
 class SocialFragment : Fragment() {
+    private lateinit var usernameTextView: TextView
+    private lateinit var editText: EditText
+    private lateinit var btn_submit: Button
+    private lateinit var quitImageButton: ImageButton
 
-private var _binding: FragmentSocialBinding? = null
-  // This property is only valid between onCreateView and
-  // onDestroyView.
-  private val binding get() = _binding!!
+    fun setUsernameText(username: String){
+        if(::usernameTextView.isInitialized){
+            usernameTextView.text = username
+        }else{
 
-  override fun onCreateView(
-    inflater: LayoutInflater,
-    container: ViewGroup?,
-    savedInstanceState: Bundle?
-  ): View {
-    val socialViewModel =
-            ViewModelProvider(this).get(SocialViewModel::class.java)
-
-    _binding = FragmentSocialBinding.inflate(inflater, container, false)
-    val root: View = binding.root
-
-    val textView: TextView = binding.textSocial
-    socialViewModel.text.observe(viewLifecycleOwner) {
-      textView.text = it
+        }
     }
-    return root
-  }
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val view = inflater.inflate(R.layout.fragment_social, container, false)
+        usernameTextView = view.findViewById(R.id.usernameTextView)
+        editText = view.findViewById(R.id.edt_message)
+        btn_submit = view.findViewById(R.id.btn_submit)
+        quitImageButton = view.findViewById(R.id.quitImageBtn)
 
-override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+        quitImageButton.setOnClickListener {
+            requireActivity().supportFragmentManager.popBackStack()
+        }
+
+        arguments?.let{
+            val username = it.getString(USERNAME_KEY)
+            username?.let{
+                usernameTextView.text = it
+            }
+        }
+        return view
+    }
+
+    fun updateUsername(username: String){
+        if(::usernameTextView.isInitialized){
+            usernameTextView.text = username
+        }else{
+
+        }
+    }
+
+    companion object{
+        const val USERNAME_KEY = "username"
+
+        fun newInstance(username: String): SocialFragment {
+            val fragment = SocialFragment()
+            val bundle = Bundle()
+            bundle.putString(USERNAME_KEY, username)
+            fragment.arguments = bundle
+            return fragment
+        }
     }
 }
