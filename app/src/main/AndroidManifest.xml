@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-feature android:name="android.hardware.camera.any" />
+    <uses-feature android:name="android.hardware.sensor.accelerometer" />
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
@@ -10,8 +11,7 @@
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="28" /> <!-- jinsoo -->
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <!-- 실시간 위치 추적을 위한 퍼미션-->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- 실시간 위치 추적을 위한 퍼미션 -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
@@ -25,6 +25,9 @@
         android:theme="@style/Theme.PosingOttae"
         tools:targetApi="31">
         <activity
+            android:name=".ui.home.ShakeCameraActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.socialmedia.KoGPTActivity"
             android:exported="false" />
         <activity
@@ -33,15 +36,14 @@
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".login.Login"
             android:exported="true"
-            android:label="@string/app_name">
-        </activity>
-
+            android:label="@string/app_name"></activity>
         <activity
             android:name=".login.SignUp"
             android:exported="false"
