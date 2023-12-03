@@ -24,9 +24,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PosingOttae"
         tools:targetApi="31">
-        <activity
-            android:name=".ui.home.ShakeCameraActivity"
-            android:exported="false" />
+
         <activity
             android:name=".ui.socialmedia.KoGPTActivity"
             android:exported="false" />
