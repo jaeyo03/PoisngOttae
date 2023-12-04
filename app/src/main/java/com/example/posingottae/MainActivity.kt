@@ -4,6 +4,7 @@ import android.animation.ObjectAnimator
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -16,7 +17,9 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.posingottae.databinding.ActivityMainBinding
 import com.example.posingottae.ui.socialmedia.KoGPTActivity
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.messaging.FirebaseMessaging
 
 
 class MainActivity : AppCompatActivity(){
@@ -38,20 +41,6 @@ class MainActivity : AppCompatActivity(){
             R.id.navigation_home, R.id.navigation_poseanalysis, R.id.navigation_socialmedia ,R.id.navigation_map,R.id.navigation_mypage))
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-
-//        val cameraBtn : FloatingActionButton = binding.floatingCameraBtn
-//
-//        cameraBtn.setOnClickListener{
-//            val options = arrayOf("Camera", "Gallery")
-//            AlertDialog.Builder(this)
-//                .setTitle("Choose Picture")
-//                .setItems(options) { _, which ->
-//                    when (which) {
-//                        0 -> takePictureLauncher.launch(null)
-//                        1 -> pickImageLauncher.launch("image/*")
-//                    }
-//                }.show()
-//        }
         setFABClickEvent()
     }
 
@@ -68,6 +57,21 @@ class MainActivity : AppCompatActivity(){
             val intent = Intent(this, KoGPTActivity::class.java)
             startActivity(intent)
         }
+
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.w("ITM", "Fetching FCM registration token failed", task.exception)
+                return@OnCompleteListener
+            }
+
+            // Get new FCM registration token
+            val token = task.result
+
+            // Log and toast
+            val msg = getString(R.string.msg_token_fmt, token)
+            Log.d("ITM", msg)
+            Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
+        })
     }
 
     private fun toggleFab() {

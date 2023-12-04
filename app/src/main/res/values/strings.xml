@@ -5,4 +5,5 @@
     <string name="title_map">Near Gym</string>
     <string name="title_social">Chatting</string>
     <string name="title_mypage">My Page</string>
+    <string name="msg_token_fmt">FCM Registration Token: %s</string>
 </resources>

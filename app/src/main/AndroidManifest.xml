@@ -68,7 +68,6 @@
             android:name="com.naver.maps.map.CLIENT_ID"
             android:value="h70kf0cidm" />
 
-
         <service
             android:name=".fcm.MyFirebaseMessagingService"
             android:exported="false">

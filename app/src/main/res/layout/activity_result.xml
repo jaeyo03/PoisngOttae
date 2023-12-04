@@ -7,7 +7,7 @@
     tools:context=".ui.poseanalysis.ResultActivity">
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/backBtn"
         android:layout_width="61dp"
         android:layout_height="65dp"
         android:layout_marginTop="28dp"

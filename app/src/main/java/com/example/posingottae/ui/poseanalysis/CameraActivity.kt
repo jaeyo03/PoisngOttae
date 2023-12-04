@@ -11,6 +11,7 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageAnalysis
@@ -21,13 +22,21 @@ import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.android.volley.Response
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.Volley
 import com.example.posingottae.databinding.ActivityCameraBinding
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.messaging.FirebaseMessaging
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.pose.Pose
 import com.google.mlkit.vision.pose.PoseDetection
 import com.google.mlkit.vision.pose.PoseDetector
 import com.google.mlkit.vision.pose.PoseLandmark
 import com.google.mlkit.vision.pose.accurate.AccuratePoseDetectorOptions
+import org.json.JSONException
+import org.json.JSONObject
+import java.lang.reflect.Method
 import java.text.SimpleDateFormat
 import java.util.Locale
 import java.util.concurrent.ExecutorService
@@ -73,6 +82,9 @@ class CameraActivity : AppCompatActivity() {
             )
         )
     )
+    var poseAnswer = false
+    private var isAutoCaptureEnabled = true
+    var yourAngle = 0.0
 
     // CameraX 이미지를 분석후, Landmark(좌표값)을 리턴해준다. 좌표값은 pose에 담겨있다.
     val onPoseDetected: (pose: Pose) -> Unit = { pose ->
@@ -84,8 +96,11 @@ class CameraActivity : AppCompatActivity() {
 //        }
 
         // 유사도 분석으로 넘어가는 코드
-        val answerScore = PoseAnalysis(pose,targetPose)
-        answerScore.match(pose,targetPose)
+        poseAnswer = PoseAnalysis(pose,targetPose).match(pose,targetPose)
+        //유사도 true,false로 결과 출력
+        yourAngle = PoseAnalysis(pose,targetPose).yourAngle
+        checkAndCapture(poseAnswer)
+
     }
 
 
@@ -104,26 +119,50 @@ class CameraActivity : AppCompatActivity() {
             )
         }
 
+        val targetAngle = 0.0
+        targetPose.targets.forEach { target ->
+            val targetAngle = target.angle}
 
         // Set up the listeners for take photo
         viewBinding.imageCaptureButton.setOnClickListener {
-            takePhoto()
+            AlertDialog.Builder(this)
+                .setTitle("Take Photo?")
+                .setMessage("Do you want to take the photo?")
+                .setPositiveButton("Agree") { dialog, which ->
+                    takePhoto()
+                    val intent = Intent(this, ResultActivity::class.java)
+                    intent.apply {
+                        putExtra("PoseResult" , poseAnswer )
+                        putExtra("TargetAnlge",targetAngle)
+                        putExtra("YourAngle",yourAngle)
+                    }
+                    startActivity(intent)
+                }
+                .setNegativeButton("Disagree", null)
+                .show()
+        }
+
+        // Set up the listeners for gallery
+        viewBinding.galleryButton.setOnClickListener {
+            AlertDialog.Builder(this)
+                .setTitle("Open Gallery?")
+                .setMessage("Do you want to open the gallery?")
+                .setPositiveButton("Agree") { dialog, which ->
+                    openGalleryForImage()
+                }
+                .setNegativeButton("Disagree", null)
+                .show()
+
+//            openGalleryForImage()
 //            val intent = Intent(this, ResultActivity::class.java)
 //            intent.apply {
-//                putExtra("PoseInfo" , bodyPoints.toString())
+//                putExtra("PoseResult" , poseAnswer)
+//                putExtra("TargetAngle", targetAngle)
+//                putExtra("YourAngle",yourAngle)
 //            }
 //            startActivity(intent)
         }
-        viewBinding.galleryButton.setOnClickListener {
-            openGalleryForImage()
-
-//            val intent = Intent(this, ResultActivity::class.java)
-//            startActivity(intent)
-        }
         cameraExecutor = Executors.newSingleThreadExecutor()
-
-
-
 
     }
 
@@ -243,14 +282,7 @@ class CameraActivity : AppCompatActivity() {
         val image = InputImage.fromFilePath(this, uri)
         poseDetector.process(image)
             .addOnSuccessListener { pose ->
-                for (landmark in pose.allPoseLandmarks) {
-                    val landmarkType = landmark.landmarkType
-                    val position = landmark.position
-                    Log.d("PoseInfo", "Type: $landmarkType, x: ${position.x}, y: ${position.y}")
-                    // 여기서 landmarkType은 그냥 0~32 까지의 숫자로만 나옴
-                    val bodyX = "${landmarkType}_X"
-                    val bodyY = "${landmarkType}_Y"
-                }
+                onPoseDetected(pose)
             }
             .addOnFailureListener { e ->
                 // 에러 처리
@@ -308,6 +340,77 @@ class CameraActivity : AppCompatActivity() {
                 finish()
             }
         }
+    }
+
+    // -----------------------------------------------------------------  여기서 부터 실시간 캡쳐와 푸쉬 알림 ------------------------------------------------
+
+    // 자동 캡쳐 및 푸시 알림 여부를 검사하는 함수
+    private fun checkAndCapture(answerScore:Boolean) {
+        // 최적의 포즈와 현재 포즈가 일치하는지 확인
+        if (answerScore && isAutoCaptureEnabled) {
+            // 자동으로 캡쳐
+            takePhoto()
+            // 푸시 알림 전송
+            getFCMToken()
+            // 자동 캡쳐를 비활성화하거나 필요에 따라 플래그를 수정할 수 있음
+            isAutoCaptureEnabled = false
+        }
+    }
+
+    // 푸시 알림을 보내는 함수
+    private fun sendPushNotification(token: String) {
+        // 여기에 푸시 알림을 보내는 로직을 추가
+        // FCM 메시지 생성
+        val notification = JSONObject()
+        val notificationBody = JSONObject()
+
+        try {
+            notificationBody.put("title", "알림 제목")
+            notificationBody.put("body", "알림 내용")
+
+            notification.put("to", token)
+            notification.put("data", notificationBody)
+        } catch (e: JSONException) {
+            e.printStackTrace()
+        }
+
+        // FCM 메시지 전송
+        val request = object : JsonObjectRequest(
+            Method.POST,
+            "https://fcm.googleapis.com/fcm/send",
+            notification,
+            Response.Listener { response ->
+                // 푸시 알림 전송 성공 시의 처리
+                Log.d(TAG, "Push notification sent successfully")
+            },
+            Response.ErrorListener { error ->
+                // 푸시 알림 전송 실패 시의 처리
+                Log.e(TAG, "Error sending push notification: $error")
+            }
+        ) {
+            // FCM 서버에 요청 헤더 추가
+            override fun getHeaders(): Map<String, String> {
+                val headers = HashMap<String, String>()
+                headers["Content-Type"] = "application/json"
+                headers["Authorization"] = "AAAA-VdO4-M:APA91bErPZ4l2NP7ml7iwVBW-ySuEyIY7jlSeM7l56QKOWFDR1s34O7b1jf3QMDoGnm3HrjL326HCLj45H8zuDQeUgUftvem1KbNbzn_4f2BM5LcNxvJO21QihE3cvCn5jno1fq55ARg" // Firebase Console에서 확인한 서버 키로 변경
+                return headers
+            }
+        }
+
+        // 요청 큐에 요청 추가
+        Volley.newRequestQueue(this).add(request)
+    }
+
+    private fun getFCMToken() {
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val token = task.result
+                // 토큰을 사용하여 푸시 알림을 보낼 수 있음
+                sendPushNotification(token)
+            } else {
+                Log.w(TAG, "Fetching FCM registration token failed", task.exception)
+            }
+        })
     }
 
     companion object {

@@ -17,12 +17,12 @@ class PoseAnalysis(pose: Pose, targetPose: CameraActivity.TargetPose) {
     )
 
     fun match(pose: Pose, targetPose: CameraActivity.TargetPose): Boolean {
-        Log.d("PoseResult",extractAndMatch(pose,targetPose).toString())
         return extractAndMatch(pose, targetPose)
     }
 
-    private val offset = 15.0
-
+    private val offset = 5.0
+    // 사용자의 각도를 저장
+    var yourAngle = 0.0
     private fun extractAndMatch(pose: Pose, targetPose: CameraActivity.TargetPose) : Boolean {
         targetPose.targets.forEach { target ->
             val (firstLandmark, middleLandmark, lastLandmark) = extractLandmark(pose, target)
@@ -31,9 +31,8 @@ class PoseAnalysis(pose: Pose, targetPose: CameraActivity.TargetPose) {
                 return false
             }
             val angle = calculateAngle(firstLandmark!!, middleLandmark!!, lastLandmark!!)
-            Log.d("Angle",angle.toString())
+            yourAngle = angle
             val targetAngle = target.angle
-            Log.d("TargetAngle",targetAngle.toString())
             if (abs(angle - targetAngle) > offset) {
                 return false
             }
