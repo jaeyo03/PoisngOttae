@@ -8,11 +8,11 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.posingottae.MainActivity
 import com.example.posingottae.R
+import com.example.posingottae.databinding.ActivityCameraBinding
 import com.example.posingottae.databinding.ActivityLoginBinding
 import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import com.google.android.gms.auth.api.signin.GoogleSignInApi
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.Firebase
@@ -92,7 +92,6 @@ class Login : AppCompatActivity() {
             // 다시 시작 Google 로그인
             var signInIntent = googleSignInClient?.signInIntent
             signInIntent?.let {
-                Log.d("ITM","구글 로그인의 시작점 -  버튼 누르고 난 후")
                 startActivityForResult(it, GOOGLE_LOGIN_CODE)
             }
         }
@@ -101,22 +100,11 @@ class Login : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         // 구글 승인 정보 가져오기
-        Log.d("ITM", "다음 로그인 액티비티 시작")
-        Log.d("ITM",requestCode.toString())
-        Log.d("ITM",GOOGLE_LOGIN_CODE.toString())
-        Log.d("ITM",resultCode.toString())
-        Log.d("ITM",Activity.RESULT_OK.toString())
-        // && resultCode == Activity.RESULT_OK 이거를 일단 뺐음
-        if (requestCode == GOOGLE_LOGIN_CODE) {
-            Log.d("ITM" , "코드 확인 시작")
+        if (requestCode == GOOGLE_LOGIN_CODE && resultCode == Activity.RESULT_OK) {
             val result = Auth.GoogleSignInApi.getSignInResultFromIntent(data!!)
-            Log.d("ITM" , result.toString())
-            Log.d("ITM" , result?.isSuccess.toString())
             if (result?.isSuccess == true) {
                 val account = result.signInAccount
-                Log.d("ITM","Auth 까지는 받았음")
                 if (account != null) {
-                    Log.d("ITM","로그인이 되는중입니다")
                     firebaseAuthWithGoogle(account)
                 }
             }
@@ -130,10 +118,8 @@ class Login : AppCompatActivity() {
                 if (task.isSuccessful) {
                     // 다음 페이지 호출
                     moveMainPage(auth?.currentUser)
-                    Log.d("ITM","로그인이 되는중입니다")
                 } else {
                     startActivity(Intent(this, MainActivity::class.java))
-                    Log.d("ITM","로그인이 되는중입니다")
                 }
             }
     }
@@ -141,17 +127,16 @@ class Login : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         // 자동 로그인
-/*        moveMainPage(auth?.currentUser)*/
+        moveMainPage(auth?.currentUser)
     }
+
     fun moveMainPage(user: FirebaseUser?) {
         // 유저가 로그인함
         Log.d("Log in", "$user")
         if (user != null) {
             Toast.makeText(this, "login success", Toast.LENGTH_SHORT).show()
-            Log.d("ITM","로그인이 되는중입니다")
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
     }
-
 }

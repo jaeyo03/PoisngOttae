@@ -66,19 +66,19 @@ dependencies {
     implementation("com.google.mlkit:pose-detection-accurate:18.0.0-beta3")
 
     // androidx Camera
-    implementation ("androidx.camera:camera-core:1.1.0")
-    implementation ("androidx.camera:camera-view:1.1.0")
-    implementation ("androidx.camera:camera-camera2:1.1.0")
-    implementation ("androidx.camera:camera-lifecycle:1.1.0")
-    implementation ("androidx.camera:camera-extensions:1.1.0")
+    implementation ("androidx.camera:camera-core:1.3.0")
+    implementation ("androidx.camera:camera-view:1.3.0")
+    implementation ("androidx.camera:camera-camera2:1.3.0")
+    implementation ("androidx.camera:camera-lifecycle:1.3.0")
+    implementation ("androidx.camera:camera-extensions:1.3.0")
     //아래는 비디오. 필요 없을수도 있음
-    implementation ("androidx.camera:camera-video:1.1.0")
+    implementation ("androidx.camera:camera-video:1.3.0")
 
     //FireBase 설정 - Jinsoo
     implementation(platform("com.google.firebase:firebase-bom:32.6.0"))
-    implementation("com.google.firebase:firebase-auth-ktx:22.3.0")
+    implementation("com.google.firebase:firebase-auth-ktx")
     implementation("com.google.firebase:firebase-analytics")
-    implementation("com.google.firebase:firebase-core:21.1.0")
+    implementation("com.google.firebase:firebase-core:21.1.1")
     // 구글 로그인 설정 - Jinsoo
     implementation("com.google.android.gms:play-services-auth:20.7.0")
 
@@ -87,7 +87,7 @@ dependencies {
     implementation ("com.google.firebase:firebase-analytics")
     implementation ("com.google.firebase:firebase-messaging")
     implementation ("com.google.firebase:firebase-storage")
-    implementation("com.google.firebase:firebase-crashlytics-buildtools:2.8.1")
+    implementation("com.google.firebase:firebase-crashlytics-buildtools:2.9.9")
 
     //KoGPT 설정 - 언선
     implementation("io.ktor:ktor-client-okhttp:1.6.0")
@@ -101,5 +101,5 @@ dependencies {
 
     //위치 추적
     implementation("com.google.android.gms:play-services-location:21.0.1")
-
+    implementation("com.google.android.gms:play-services-location:21.0.1")
 }

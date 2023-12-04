@@ -1,8 +1,7 @@
-package com.example.posingottae
+package com.example.posingottae.ui.poseanalysis
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -27,15 +26,14 @@ import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.pose.Pose
 import com.google.mlkit.vision.pose.PoseDetection
 import com.google.mlkit.vision.pose.PoseDetector
+import com.google.mlkit.vision.pose.PoseLandmark
 import com.google.mlkit.vision.pose.accurate.AccuratePoseDetectorOptions
 import java.text.SimpleDateFormat
 import java.util.Locale
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
-typealias LumaListener = (luma: Double) -> Unit
-
-class cameraActivity : AppCompatActivity() {
+class CameraActivity : AppCompatActivity() {
     private lateinit var viewBinding: ActivityCameraBinding
 
     private var imageCapture: ImageCapture? = null
@@ -55,45 +53,39 @@ class cameraActivity : AppCompatActivity() {
         PoseDetection.getClient(options)
     }
 
-    val bodyPoints = mutableMapOf<String, Double>(
-        "NOSE_X" to 0.0, "NOSE_Y" to 0.0,
-        "LEFT_EYE_INNER_X" to 0.0, "LEFT_EYE_INNER_Y" to 0.0,
-        "LEFT_EYE_X" to 0.0, "LEFT_EYE_Y" to 0.0,
-        "LEFT_EYE_OUTER_X" to 0.0, "LEFT_EYE_OUTER_Y" to 0.0,
-        "RIGHT_EYE_INNER_X" to 0.0, "RIGHT_EYE_INNER_Y" to 0.0,
-        "RIGHT_EYE_X" to 0.0, "RIGHT_EYE_Y" to 0.0,
-        "RIGHT_EYE_OUTER_X" to 0.0, "RIGHT_EYE_OUTER_Y" to 0.0,
-        "LEFT_EAR_X" to 0.0, "LEFT_EAR_Y" to 0.0,
-        "RIGHT_EAR_X" to 0.0, "RIGHT_EAR_Y" to 0.0,
-        "LEFT_MOUTH_X" to 0.0, "LEFT_MOUTH_Y" to 0.0,
-        "RIGHT_MOUTH_X" to 0.0, "RIGHT_MOUTH_Y" to 0.0,
-        "LEFT_SHOULDER_X" to 0.0, "LEFT_SHOULDER_Y" to 0.0,
-        "RIGHT_SHOULDER_X" to 0.0, "RIGHT_SHOULDER_Y" to 0.0,
-        "LEFT_ELBOW_X" to 0.0, "LEFT_ELBOW_Y" to 0.0,
-        "RIGHT_ELBOW_X" to 0.0, "RIGHT_ELBOW_Y" to 0.0,
-        "LEFT_WRIST_X" to 0.0, "LEFT_WRIST_Y" to 0.0,
-        "RIGHT_WRIST_X" to 0.0, "RIGHT_WRIST_Y" to 0.0,
-        "LEFT_PINKY_X" to 0.0, "LEFT_PINKY_Y" to 0.0,
-        "RIGHT_PINKY_X" to 0.0, "RIGHT_PINKY_Y" to 0.0,
-        "LEFT_INDEX_X" to 0.0, "LEFT_INDEX_Y" to 0.0,
-        "RIGHT_INDEX_X" to 0.0, "RIGHT_INDEX_Y" to 0.0,
-        "LEFT_THUMB_X" to 0.0, "LEFT_THUMB_Y" to 0.0,
-        "RIGHT_THUMB_X" to 0.0, "RIGHT_THUMB_Y" to 0.0,
-        "LEFT_HIP_X" to 0.0, "LEFT_HIP_Y" to 0.0,
-        "RIGHT_HIP_X" to 0.0, "RIGHT_HIP_Y" to 0.0,
-        "LEFT_KNEE_X" to 0.0, "LEFT_KNEE_Y" to 0.0,
-        "RIGHT_KNEE_X" to 0.0, "RIGHT_KNEE_Y" to 0.0,
-        "LEFT_ANKLE_X" to 0.0, "LEFT_ANKLE_Y" to 0.0,
-        "RIGHT_ANKLE_X" to 0.0, "RIGHT_ANKLE_Y" to 0.0,
-        "LEFT_HEEL_X" to 0.0, "LEFT_HEEL_Y" to 0.0,
-        "RIGHT_HEEL_X" to 0.0, "RIGHT_HEEL_Y" to 0.0,
-        "LEFT_FOOT_INDEX_X" to 0.0, "LEFT_FOOT_INDEX_Y" to 0.0,
-        "RIGHT_FOOT_INDEX_X" to 0.0, "RIGHT_FOOT_INDEX_Y" to 0.0
+    data class TargetPose(
+        val targets: List<PoseAnalysis.TargetShape>
+    )
+
+    private val targetPose: TargetPose = TargetPose(
+        listOf(
+            PoseAnalysis.TargetShape(
+                PoseLandmark.LEFT_ANKLE,
+                PoseLandmark.LEFT_KNEE,
+                PoseLandmark.LEFT_HIP,
+                170.0
+            ),
+            PoseAnalysis.TargetShape(
+                PoseLandmark.LEFT_WRIST,
+                PoseLandmark.LEFT_ELBOW,
+                PoseLandmark.LEFT_SHOULDER,
+                80.0
+            )
+        )
     )
 
     // CameraX 이미지를 분석후, Landmark(좌표값)을 리턴해준다. 좌표값은 pose에 담겨있다.
     val onPoseDetected: (pose: Pose) -> Unit = { pose ->
+//        for (landmark in pose.allPoseLandmarks) {
+//            val landmarkType = landmark.landmarkType
+//            val position = landmark.position
+//            Log.d("PoseInfo", "Type: $landmarkType, x: ${position.x}, y: ${position.y}")
+//            // 여기서 landmarkType은 그냥 0~32 까지의 숫자로만 나옴
+//        }
 
+        // 유사도 분석으로 넘어가는 코드
+        val answerScore = PoseAnalysis(pose,targetPose)
+        answerScore.match(pose,targetPose)
     }
 
 
@@ -108,7 +100,8 @@ class cameraActivity : AppCompatActivity() {
             startCamera()
         } else {
             ActivityCompat.requestPermissions(
-                this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS)
+                this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS
+            )
         }
 
 
@@ -150,10 +143,11 @@ class cameraActivity : AppCompatActivity() {
         }
 
         // Create output options object which contains file + metadata
-        val outputOptions = ImageCapture.OutputFileOptions
-            .Builder(contentResolver,
-                MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                contentValues)
+        val outputOptions = ImageCapture.OutputFileOptions.Builder(
+            contentResolver,
+            MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+            contentValues
+        )
             .build()
 
         // Set up image capture listener, which is triggered after photo has
@@ -198,16 +192,16 @@ class cameraActivity : AppCompatActivity() {
             // Image Capture
             imageCapture = ImageCapture.Builder().build()
                 .also {
-                    cameraActivity.CameraAnalyzer(poseDetector,onPoseDetected)
+                    CameraActivity.CameraAnalyzer(poseDetector,onPoseDetected)
                 }
 
-//            val imageAnalyzer = ImageAnalysis.Builder()
-//                .build()
-//                .also{
-//                    it.setAnalyzer(cameraExecutor,
-//                        cameraActivity.CameraAnalyzer(poseDetector, onPoseDetected)
-//                    )
-//                }
+            val imageAnalyzer = ImageAnalysis.Builder()
+                .build()
+                .also{
+                    it.setAnalyzer(cameraExecutor,
+                        CameraActivity.CameraAnalyzer(poseDetector, onPoseDetected)
+                    )
+                }
 
             // Select back camera as a default
             val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
@@ -218,7 +212,7 @@ class cameraActivity : AppCompatActivity() {
 
                 // Bind use cases to camera
                 cameraProvider.bindToLifecycle(
-                    this, cameraSelector, preview, imageCapture ) //imageAnalyzer 그냥 넣으면 됨
+                    this, cameraSelector, preview, imageCapture ,imageAnalyzer) //imageAnalyzer 그냥 넣으면 됨
 
             } catch(exc: Exception) {
                 Log.e(TAG, "Use case binding failed", exc)
@@ -237,7 +231,7 @@ class cameraActivity : AppCompatActivity() {
     // 갤러리에서 사진을 선택한 후 처리
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK && requestCode == GALLERY_REQUEST_CODE) {
+        if (resultCode == RESULT_OK && requestCode == GALLERY_REQUEST_CODE) {
             data?.data?.let { uri ->
                 analyzePoseFromUri(uri)
             }
@@ -256,13 +250,7 @@ class cameraActivity : AppCompatActivity() {
                     // 여기서 landmarkType은 그냥 0~32 까지의 숫자로만 나옴
                     val bodyX = "${landmarkType}_X"
                     val bodyY = "${landmarkType}_Y"
-
-                    bodyPoints.put(bodyX , position.x.toDouble())
-                    bodyPoints.put(bodyY, position.y.toDouble())
-
-                    Log.d("BodyPoint",bodyPoints.toString())
                 }
-                // 여기서 pose 처리
             }
             .addOnFailureListener { e ->
                 // 에러 처리
@@ -271,7 +259,8 @@ class cameraActivity : AppCompatActivity() {
 
     private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
         ContextCompat.checkSelfPermission(
-            baseContext, it) == PackageManager.PERMISSION_GRANTED
+            baseContext, it
+        ) == PackageManager.PERMISSION_GRANTED
     }
 
     private class CameraAnalyzer(
@@ -311,9 +300,11 @@ class cameraActivity : AppCompatActivity() {
             if (allPermissionsGranted()) {
                 startCamera()
             } else {
-                Toast.makeText(this,
+                Toast.makeText(
+                    this,
                     "Permissions not granted by the user.",
-                    Toast.LENGTH_SHORT).show()
+                    Toast.LENGTH_SHORT
+                ).show()
                 finish()
             }
         }
@@ -335,4 +326,3 @@ class cameraActivity : AppCompatActivity() {
             }.toTypedArray()
     }
 }
-

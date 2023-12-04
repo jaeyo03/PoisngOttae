@@ -3,7 +3,6 @@ package com.example.posingottae.ui.poseanalysis
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,10 +12,9 @@ import android.widget.Spinner
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
-import com.example.posingottae.cameraActivity
 import com.example.posingottae.databinding.FragmentPoseBinding
+import org.checkerframework.checker.units.qual.C
 
 
 class PoseFragment : Fragment() {
@@ -100,7 +98,7 @@ private var _binding: FragmentPoseBinding? = null
 
         val goPose = binding.goPose
         goPose.setOnClickListener {
-            val intent = Intent(activity,cameraActivity::class.java)
+            val intent = Intent(activity, CameraActivity::class.java)
             intent.putExtra("selectedPhotoID",fragmentInfo)
             startActivity(intent)
         }
