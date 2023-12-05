@@ -26,9 +26,15 @@
 
     <fragment
         android:id="@+id/navigation_socialmedia"
-        android:name="com.example.posingottae.ui.socialmedia.SocialFragment"
+        android:name="com.example.posingottae.ui.socialmedia.BoardFragment"
         android:label="@string/title_social"
-        tools:layout="@layout/fragment_social" />
+        tools:layout="@layout/fragment_board_list" />
+
+    <fragment
+        android:id="@+id/action_boardFragment_to_postDetailFragment"
+        android:name="com.example.posingottae.ui.socialmedia.PostDetailFragment"
+        android:label="@string/title_social"
+        tools:layout="@layout/fragment_post_detail" />
 
     <fragment
         android:id="@+id/navigation_mypage"
