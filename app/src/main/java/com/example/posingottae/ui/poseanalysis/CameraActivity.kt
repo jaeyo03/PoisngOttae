@@ -371,8 +371,14 @@ class CameraActivity : AppCompatActivity() {
 
     var poseAnswer = false
     private var isAutoCaptureEnabled = true
+    val list1 : MutableList<Double> = mutableListOf()
+    val list2 : MutableList<Double> = mutableListOf()
+    var angleResult = PoseAnalysis.AnglesResult(list1,list2)
 
+    var userAnglesList : MutableList<Double> = mutableListOf()
+    var answerAnglesList : MutableList<Double> = mutableListOf()
 
+    var poseInformation = ""
 
     // CameraX 이미지를 분석후, Landmark(좌표값)을 리턴해준다. 좌표값은 pose에 담겨있다.
     val onPoseDetected: (pose: Pose) -> Unit = { pose ->
@@ -385,6 +391,7 @@ class CameraActivity : AppCompatActivity() {
 
         // 선택된 포즈 정보 불러오기
         val selectedPhoto = intent.getStringExtra("selectedPhoto")
+        poseInformation = selectedPhoto.toString()
         val selectedPose = when(selectedPhoto){
             "FrontAbd" -> poseFrontAbd
             "FrontLineup" -> poseFrontLineup
@@ -406,13 +413,16 @@ class CameraActivity : AppCompatActivity() {
             // 유사도 분석으로 넘어가는 코드
             //유사도 true,false로 결과 출력
             poseAnswer = poseAnalysis.match(pose,selectedPose)
-            val angleResult = poseAnalysis.showAngle(pose,selectedPose)
+            angleResult = poseAnalysis.showAngle(pose,selectedPose)
+            userAnglesList = angleResult.userAnglesList
+            answerAnglesList = angleResult.answerAnglesList
             checkAndCapture(poseAnswer)
         } else{
             Toast.makeText(this, "No selected Pose! Please select the Pose!", Toast.LENGTH_SHORT).show()
         }
     }
 
+    var photoUri : Uri? = null
     // Start onCreate
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -441,8 +451,13 @@ class CameraActivity : AppCompatActivity() {
                     takePhoto()
                     val intent = Intent(this, ResultActivity::class.java)
                     intent.apply {
-//                        putExtra("PoseResult" , poseAnswer )
-//                        putExtra("YourAngle",yourAngle)
+                        putExtra("UserAngle" , userAnglesList.toString() )
+                        putExtra("AnswerAngle", answerAnglesList.toString())
+                        putExtra("PoseInformation",poseInformation)
+                        action = Intent.ACTION_SEND
+                        putExtra(Intent.EXTRA_STREAM, photoUri)
+                        type = "image/jpeg"
+                        addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
                     }
                     startActivity(intent)
                 }
@@ -457,18 +472,18 @@ class CameraActivity : AppCompatActivity() {
                 .setMessage("Do you want to open the gallery?")
                 .setPositiveButton("Agree") { dialog, which ->
                     openGalleryForImage()
-                }
-                .setNegativeButton("Disagree", null)
-                .show()
-
-//            openGalleryForImage()
-//            val intent = Intent(this, ResultActivity::class.java)
+                                val intent = Intent(this, ResultActivity::class.java)
 //            intent.apply {
 //                putExtra("PoseResult" , poseAnswer)
 //                putExtra("TargetAngle", targetAngle)
 //                putExtra("YourAngle",yourAngle)
 //            }
 //            startActivity(intent)
+                }
+                .setNegativeButton("Disagree", null)
+                .show()
+
+
         }
         cameraExecutor = Executors.newSingleThreadExecutor()
 
@@ -582,12 +597,24 @@ class CameraActivity : AppCompatActivity() {
             data?.data?.let { uri ->
                 analyzePoseFromUri(uri)
             }
+            val intent = Intent(this, ResultActivity::class.java)
+            intent.apply {
+                putExtra("UserAngle" , userAnglesList.toString() )
+                putExtra("AnswerAngle", answerAnglesList.toString())
+                putExtra("PoseInformation",poseInformation)
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_STREAM, photoUri)
+                type = "image/jpeg"
+                addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            }
+            startActivity(intent)
         }
     }
 
     // URI로부터 사진을 분석하는 함수
     private fun analyzePoseFromUri(uri: Uri) {
         val image = InputImage.fromFilePath(this, uri)
+        photoUri = uri
         poseDetector.process(image)
             .addOnSuccessListener { pose ->
                 onPoseDetected(pose)
@@ -649,6 +676,7 @@ class CameraActivity : AppCompatActivity() {
             }
         }
     }
+
 
     // -----------------------------------------------------------------  여기서 부터 실시간 캡쳐와 푸쉬 알림 ------------------------------------------------
 

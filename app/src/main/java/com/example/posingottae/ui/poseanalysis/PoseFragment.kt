@@ -84,7 +84,7 @@ private var _binding: FragmentPoseBinding? = null
         myPager.currentItem = 0 // 시작 지점
         myPager.offscreenPageLimit = 4 // 최대 이미지 수
 
-        var showPosition = 0
+
         var fragmentInfo =""
         myPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
@@ -98,18 +98,17 @@ private var _binding: FragmentPoseBinding? = null
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
                 rIndicator.animatePageSelected(position % pageNum)
-                showPosition = position
                 fragmentInfo = when {
-                    showPoseType == "Front" && showPosition == 0 -> "FrontAbd"
-                    showPoseType == "Front" && showPosition == 1 -> "FrontLineup"
-                    showPoseType == "Front" && showPosition == 2 -> "Frontdb"
-                    showPoseType == "Front" && showPosition == 3 -> "FrontSpread"
-                    showPoseType == "Front" && showPosition == 4 -> "FrontTriceps"
-                    showPoseType == "Muscular" && showPosition == 0 -> "Muscular1"
-                    showPoseType == "Muscular" && showPosition == 1 -> "Muscular2"
-                    showPoseType == "Back" && showPosition == 0 -> "BackDouble"
-                    showPoseType == "Back" && showPosition == 1 -> "Backlat"
-                    showPoseType == "Side" && showPosition == 0 -> "SideChest"
+                    showPoseType == "Front" && position == 0 -> "FrontAbd"
+                    showPoseType == "Front" && position == 1 -> "FrontLineup"
+                    showPoseType == "Front" && position == 2 -> "Frontdb"
+                    showPoseType == "Front" && position == 3 -> "FrontSpread"
+                    showPoseType == "Front" && position == 4 -> "FrontTriceps"
+                    showPoseType == "Muscular" && position == 0 -> "Muscular1"
+                    showPoseType == "Muscular" && position == 1 -> "Muscular2"
+                    showPoseType == "Back" && position == 0 -> "BackDouble"
+                    showPoseType == "Back" && position == 1 -> "Backlat"
+                    showPoseType == "Side" && position == 0 -> "SideChest"
                     else -> "Empty"
                 }
             }

@@ -18,12 +18,6 @@ class PoseFrontAbdFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view =inflater.inflate(R.layout.pose_front_abdominal, container, false)
-        val image = view.findViewById<ImageView>(R.id.frontAbd)
-        val drawable = image.drawable.toBitmap()
-
-        image.setOnClickListener{
-            Log.d("ITM",drawable.toString())
-        }
         return view
     }
 

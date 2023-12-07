@@ -19,131 +19,156 @@
         app:srcCompat="@android:drawable/ic_menu_revert" />
 
     <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginEnd="60dp"
-        app:layout_constraintEnd_toStartOf="@+id/imageView3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView3"
-        tools:srcCompat="@tools:sample/avatars" />
-
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="128dp"
-        android:layout_marginEnd="48dp"
+        android:id="@+id/yourPose"
+        android:layout_width="119dp"
+        android:layout_height="131dp"
+        android:layout_marginTop="184dp"
+        android:layout_marginEnd="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
-
-    <SeekBar
-        android:id="@+id/seekBar"
-        android:layout_width="198dp"
-        android:layout_height="64dp"
-        tools:layout_editor_absoluteX="106dp"
-        tools:layout_editor_absoluteY="625dp" />
 
     <RatingBar
         android:id="@+id/ratingBar2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="296dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/answerLeftArm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="15dp"
         android:text="TextView"
-        tools:layout_editor_absoluteX="104dp"
-        tools:layout_editor_absoluteY="443dp" />
+        app:layout_constraintStart_toStartOf="@+id/textView16"
+        app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/userLeftArm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="17dp"
         android:text="TextView"
-        tools:layout_editor_absoluteX="253dp"
-        tools:layout_editor_absoluteY="441dp" />
+        app:layout_constraintStart_toStartOf="@+id/textView17"
+        app:layout_constraintTop_toBottomOf="@+id/textView17" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/answerLeftLeg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="17dp"
         android:text="TextView"
-        tools:layout_editor_absoluteX="104dp"
-        tools:layout_editor_absoluteY="493dp" />
+        app:layout_constraintBottom_toTopOf="@+id/answerRightArm"
+        app:layout_constraintStart_toStartOf="@+id/answerRightArm" />
 
     <TextView
-        android:id="@+id/textView10"
+        android:id="@+id/userLeftLeg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="26dp"
         android:text="TextView"
-        tools:layout_editor_absoluteX="246dp"
-        tools:layout_editor_absoluteY="492dp" />
+        app:layout_constraintBottom_toTopOf="@+id/userRightArm"
+        app:layout_constraintStart_toStartOf="@+id/userRightArm" />
 
     <TextView
-        android:id="@+id/textView13"
+        android:id="@+id/userRightLeg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="23dp"
+        android:layout_marginBottom="28dp"
         android:text="TextView"
-        tools:layout_editor_absoluteX="235dp"
-        tools:layout_editor_absoluteY="572dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/answerRightLeg" />
 
     <TextView
-        android:id="@+id/textView11"
+        android:id="@+id/userRightArm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="23dp"
+        android:layout_marginBottom="17dp"
         android:text="TextView"
-        tools:layout_editor_absoluteX="246dp"
-        tools:layout_editor_absoluteY="536dp" />
+        app:layout_constraintBottom_toTopOf="@+id/userRightLeg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/answerRightArm" />
 
     <TextView
-        android:id="@+id/textView12"
+        android:id="@+id/answerRightLeg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="28dp"
         android:text="TextView"
-        tools:layout_editor_absoluteX="104dp"
-        tools:layout_editor_absoluteY="572dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/userRightLeg"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView7"
+        android:id="@+id/answerRightArm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="25dp"
         android:text="TextView"
-        tools:layout_editor_absoluteX="104dp"
-        tools:layout_editor_absoluteY="528dp" />
+        app:layout_constraintBottom_toTopOf="@+id/answerRightLeg"
+        app:layout_constraintEnd_toStartOf="@+id/userRightArm"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/reviewText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="14dp"
         android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ratingBar2" />
+        app:layout_constraintBottom_toTopOf="@+id/textView16"
+        app:layout_constraintEnd_toStartOf="@+id/textView17" />
 
     <TextView
         android:id="@+id/textView16"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="71dp"
+        android:layout_marginTop="57dp"
+        android:layout_marginEnd="71dp"
         android:text="Answer Pose"
-        tools:layout_editor_absoluteX="98dp"
-        tools:layout_editor_absoluteY="410dp" />
+        app:layout_constraintEnd_toStartOf="@+id/textView17"
+        app:layout_constraintStart_toStartOf="@+id/relativeLayout"
+        app:layout_constraintTop_toBottomOf="@+id/ratingBar2" />
 
     <TextView
         android:id="@+id/textView17"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="13dp"
         android:text="Your Pose"
-        tools:layout_editor_absoluteX="251dp"
-        tools:layout_editor_absoluteY="406dp" />
+        app:layout_constraintEnd_toEndOf="@+id/ratingBar2"
+        app:layout_constraintStart_toEndOf="@+id/relativeLayout"
+        app:layout_constraintTop_toBottomOf="@+id/reviewText" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="212dp"
+        android:layout_height="276dp"
+        android:layout_marginTop="120dp"
+        app:layout_constraintEnd_toStartOf="@+id/yourPose"
+        app:layout_constraintHorizontal_bias="0.692"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragmentContainerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:layout_editor_absoluteX="58dp"
+            tools:layout_editor_absoluteY="128dp" />
+    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
