@@ -3,6 +3,7 @@ package com.example.posingottae.ui.socialmedia
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -45,8 +46,7 @@ class BoardFragment : Fragment() {
             val title = editTextTitle.text.toString()
             val content = editTextContent.text.toString()
 
-            val userId = FirebaseAuth.getInstance().currentUser?.uid
-            val postTitle = "$title - $userId"
+            val postTitle = "$title"
 
             addPost(postTitle, content, view.findViewById(R.id.textViewResult))
 
@@ -76,35 +76,57 @@ class BoardFragment : Fragment() {
         }
 
     }
-    private fun addPost(postTitle: String, content: String, resultTextView: TextView) {
-        val post = Post(postTitle, content, System.currentTimeMillis())
+    private fun addPost(title: String, content: String, resultTextView: TextView) {
+        val user = FirebaseAuth.getInstance().currentUser
+        val postContent = content
 
-        // 동적으로 생성된 Document ID를 사용
+        // Fetch the username from Firestore based on the UID
+        val userRef = db.collection("users").document(user!!.uid)
+        userRef.get()
+            .addOnSuccessListener { document ->
+                if (document.exists()) {
+                    val username = document.getString("username")
 
-        db.collection("posts")
-            .add(post)
-            .addOnSuccessListener {
-                // 쓰기 성공 처리
-                resultTextView.apply {
-                    text = "게시글이 성공적으로 작성되었습니다."
-                    visibility = View.VISIBLE
+                    // Create post title with format "$title - $username"
+                    val postTitle = "$title - $username"
+
+                    val post = Post(postTitle, postContent, System.currentTimeMillis())
+
+                    // Add the post to Firestore
+                    db.collection("posts")
+                        .add(post)
+                        .addOnSuccessListener {
+                            // Write success
+                            resultTextView.apply {
+                                text = "게시글이 성공적으로 작성되었습니다."
+                                visibility = View.VISIBLE
+                            }
+                            handler.postDelayed({
+                                resultTextView.visibility = View.GONE
+                            }, 2000)
+                        }
+                        .addOnFailureListener {
+                            // Write failure
+                            resultTextView.apply {
+                                text = "게시글 작성 실패"
+                                visibility = View.VISIBLE
+                                setTextColor(resources.getColor(android.R.color.holo_red_dark, null))
+                            }
+                            handler.postDelayed({
+                                resultTextView.visibility = View.GONE
+                            }, 2000)
+                        }
+                } else {
+                    // Handle the case where the user document doesn't exist
+                    Log.d("BoardFragment", "User document not found")
                 }
-                handler.postDelayed({
-                    resultTextView.visibility = View.GONE
-                }, 2000)  // 2초 뒤에 TextView를 숨김
             }
-            .addOnFailureListener {
-                // 쓰기 실패 처리
-                resultTextView.apply {
-                    text = "게시글 작성 실패"
-                    visibility = View.VISIBLE
-                    setTextColor(resources.getColor(android.R.color.holo_red_dark, null))
-                }
-                handler.postDelayed({
-                    resultTextView.visibility = View.GONE
-                }, 2000)  // 2초 뒤에 TextView를 숨김
+            .addOnFailureListener { exception ->
+                // Handle errors when fetching user data
+                Log.w("BoardFragment", "Error getting user document", exception)
             }
     }
+
 
     private fun getPosts(callback: (List<Post>) -> Unit) {
         db.collection("posts")
