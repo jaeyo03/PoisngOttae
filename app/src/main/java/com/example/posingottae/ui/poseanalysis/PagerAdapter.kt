@@ -19,7 +19,6 @@ import com.example.posingottae.ui.poseanalysis.PictureFragment.PoseSideFragment
 
 class PagerAdapter(fa: PoseFragment, var mCount: Int) : FragmentStateAdapter(fa!!) {
     private var fragmentItems : List<Fragment> = listOf()
-
     fun setFragments(pose: String){
         fragmentItems = when(pose){
             "Front" -> listOf(PoseFrontAbdFragment(),PoseFrontFragment(),PoseFrontdbFragment(),PoseFrontspreadFragment(),

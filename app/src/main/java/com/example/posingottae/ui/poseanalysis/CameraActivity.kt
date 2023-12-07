@@ -371,7 +371,8 @@ class CameraActivity : AppCompatActivity() {
 
     var poseAnswer = false
     private var isAutoCaptureEnabled = true
-    var yourAngle = 0.0
+
+
 
     // CameraX 이미지를 분석후, Landmark(좌표값)을 리턴해준다. 좌표값은 pose에 담겨있다.
     val onPoseDetected: (pose: Pose) -> Unit = { pose ->
@@ -382,14 +383,34 @@ class CameraActivity : AppCompatActivity() {
 //            // 여기서 landmarkType은 그냥 0~32 까지의 숫자로만 나옴
 //        }
 
-        val poseAnalysis = PoseAnalysis(pose,poseFrontSpread)
-        // 유사도 분석으로 넘어가는 코드
-        poseAnswer = poseAnalysis.match(pose,poseFrontSpread)
-        //유사도 true,false로 결과 출력
-//        yourAngle = PoseAnalysis(pose,targetPose).yourAngle
-        Log.d("YourAngle",yourAngle.toString())
-        checkAndCapture(poseAnswer)
+        // 선택된 포즈 정보 불러오기
+        val selectedPhoto = intent.getStringExtra("selectedPhoto")
+        val selectedPose = when(selectedPhoto){
+            "FrontAbd" -> poseFrontAbd
+            "FrontLineup" -> poseFrontLineup
+            "Frontdb" -> poseFrontDoubleBiceps
+            "FrontSpread" -> poseFrontSpread
+            "FrontTriceps" -> poseFrontTriceps
+            "Muscular1" -> poseMuscular1
+            "Muscular2" -> poseMuscular2
+            "SideChest" -> poseSideChest
+            "BackDouble" -> poseBackDouble
+            "Backlat" -> poseBacklat
+            else -> {
+                null
+            }
+        }
 
+        if (selectedPose != null){
+            val poseAnalysis = PoseAnalysis(pose,selectedPose)
+            // 유사도 분석으로 넘어가는 코드
+            //유사도 true,false로 결과 출력
+            poseAnswer = poseAnalysis.match(pose,selectedPose)
+            val angleResult = poseAnalysis.showAngle(pose,selectedPose)
+            checkAndCapture(poseAnswer)
+        } else{
+            Toast.makeText(this, "No selected Pose! Please select the Pose!", Toast.LENGTH_SHORT).show()
+        }
     }
 
     // Start onCreate
@@ -410,7 +431,6 @@ class CameraActivity : AppCompatActivity() {
 
 
 
-
         // Set up the listeners for take photo
         viewBinding.imageCaptureButton.setOnClickListener {
 
@@ -421,8 +441,8 @@ class CameraActivity : AppCompatActivity() {
                     takePhoto()
                     val intent = Intent(this, ResultActivity::class.java)
                     intent.apply {
-                        putExtra("PoseResult" , poseAnswer )
-                        putExtra("YourAngle",yourAngle)
+//                        putExtra("PoseResult" , poseAnswer )
+//                        putExtra("YourAngle",yourAngle)
                     }
                     startActivity(intent)
                 }

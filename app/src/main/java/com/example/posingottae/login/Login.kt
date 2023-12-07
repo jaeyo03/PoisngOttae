@@ -39,14 +39,14 @@ class Login : AppCompatActivity() {
         auth = Firebase.auth
 
         // 구글 로그인 옵션
-        var gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.googleClientId)).requestEmail().build()
-
-        // 구글 로그인 클래스
-        googleSignInClient = GoogleSignIn.getClient(this, gso)
-
-        // 구글 로그인 버튼
-        binding?.googleBtn?.setOnClickListener { googleLogin() }
+//        var gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+//            .requestIdToken(getString(R.string.googleClientId)).requestEmail().build()
+//
+//        // 구글 로그인 클래스
+//        googleSignInClient = GoogleSignIn.getClient(this, gso)
+//
+//        // 구글 로그인 버튼
+//        binding?.googleBtn?.setOnClickListener { googleLogin() }
         // 일반 로그인 버튼
         binding?.loginBtn?.setOnClickListener { emailLogin() }
 
@@ -87,15 +87,15 @@ class Login : AppCompatActivity() {
         }
     }
 
-    private fun googleLogin() {
-        googleSignInClient?.signOut()?.addOnCompleteListener(this) {
-            // 다시 시작 Google 로그인
-            var signInIntent = googleSignInClient?.signInIntent
-            signInIntent?.let {
-                startActivityForResult(it, GOOGLE_LOGIN_CODE)
-            }
-        }
-    }
+//    private fun googleLogin() {
+//        googleSignInClient?.signOut()?.addOnCompleteListener(this) {
+//            // 다시 시작 Google 로그인
+//            var signInIntent = googleSignInClient?.signInIntent
+//            signInIntent?.let {
+//                startActivityForResult(it, GOOGLE_LOGIN_CODE)
+//            }
+//        }
+//    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

@@ -3,6 +3,7 @@ package com.example.posingottae.ui.poseanalysis
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.example.posingottae.databinding.FragmentPoseBinding
+import com.example.posingottae.ui.poseanalysis.PictureFragment.PoseFrontTricepsFragment
 import org.checkerframework.checker.units.qual.C
 
 
@@ -47,6 +49,7 @@ private var _binding: FragmentPoseBinding? = null
         val poses = arrayOf("Choose Pose!" ,"Front","Back","Side","Muscular")
         val poseSpinner : Spinner = binding.choosePoseSpinner
 
+        var showPoseType = ""
 
         poseSpinner.adapter = ArrayAdapter(requireContext(),android.R.layout.simple_spinner_dropdown_item,poses)
         poseSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
@@ -59,8 +62,9 @@ private var _binding: FragmentPoseBinding? = null
                 val choosedPose = poses[position]
                 val newPagerAdapter = PagerAdapter(this@PoseFragment, pageNum)
                 newPagerAdapter.setFragments(choosedPose)
+                showPoseType = choosedPose
+                Log.d("ITM",showPoseType)
                 myPager.adapter = newPagerAdapter
-
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -80,26 +84,43 @@ private var _binding: FragmentPoseBinding? = null
         myPager.currentItem = 0 // 시작 지점
         myPager.offscreenPageLimit = 4 // 최대 이미지 수
 
-        var fragmentInfo = ""
-
+        var showPosition = 0
+        var fragmentInfo =""
         myPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
                 super.onPageScrolled(position, positionOffset, positionOffsetPixels)
                 if (positionOffsetPixels == 0) {
                     myPager.currentItem = position
+
                 }
             }
 
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
                 rIndicator.animatePageSelected(position % pageNum)
+                showPosition = position
+                fragmentInfo = when {
+                    showPoseType == "Front" && showPosition == 0 -> "FrontAbd"
+                    showPoseType == "Front" && showPosition == 1 -> "FrontLineup"
+                    showPoseType == "Front" && showPosition == 2 -> "Frontdb"
+                    showPoseType == "Front" && showPosition == 3 -> "FrontSpread"
+                    showPoseType == "Front" && showPosition == 4 -> "FrontTriceps"
+                    showPoseType == "Muscular" && showPosition == 0 -> "Muscular1"
+                    showPoseType == "Muscular" && showPosition == 1 -> "Muscular2"
+                    showPoseType == "Back" && showPosition == 0 -> "BackDouble"
+                    showPoseType == "Back" && showPosition == 1 -> "Backlat"
+                    showPoseType == "Side" && showPosition == 0 -> "SideChest"
+                    else -> "Empty"
+                }
             }
         })
+
+
 
         val goPose = binding.goPose
         goPose.setOnClickListener {
             val intent = Intent(activity, CameraActivity::class.java)
-            intent.putExtra("selectedPhotoID",fragmentInfo)
+            intent.putExtra("selectedPhoto",fragmentInfo)
             startActivity(intent)
         }
         return root
@@ -110,8 +131,6 @@ override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
-
 }
 
 

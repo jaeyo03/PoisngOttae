@@ -3,8 +3,10 @@ package com.example.posingottae.ui.poseanalysis
 import android.util.Log
 import com.google.mlkit.vision.pose.Pose
 import com.google.mlkit.vision.pose.PoseLandmark
+import org.checkerframework.checker.units.qual.Angle
 import java.lang.Math.abs
 import kotlin.math.atan2
+
 
 
 class PoseAnalysis(pose: Pose, targetPose: CameraActivity.TargetPose) {
@@ -14,6 +16,11 @@ class PoseAnalysis(pose: Pose, targetPose: CameraActivity.TargetPose) {
         val middleLandmarkType: Int,
         val lastLandmarkType: Int,
         val angle: Double
+    )
+
+    data class AnglesResult(
+        val answerAnglesList: MutableList<Double>,
+        val userAnglesList: MutableList<Double>
     )
 
     fun match(pose: Pose, targetPose: CameraActivity.TargetPose): Boolean {
@@ -36,6 +43,24 @@ class PoseAnalysis(pose: Pose, targetPose: CameraActivity.TargetPose) {
             }
         }
         return true
+    }
+
+    // 각도를 리턴해주는 함수
+    fun showAngle(pose: Pose, targetPose: CameraActivity.TargetPose) : AnglesResult {
+        val answerAnglesList : MutableList<Double> = mutableListOf()
+        val userAnglesList : MutableList<Double> = mutableListOf()
+        targetPose.targets.forEach { target ->
+            val (firstLandmark, middleLandmark, lastLandmark) = extractLandmark(pose, target)
+            //Check landmark is null
+            if (landmarkNotFound(firstLandmark, middleLandmark, lastLandmark)) {
+                return AnglesResult(answerAnglesList,userAnglesList)
+            }
+            val angle = calculateAngle(firstLandmark!!, middleLandmark!!, lastLandmark!!)
+            val targetAngle = target.angle
+            answerAnglesList += targetAngle
+            userAnglesList += angle
+        }
+        return AnglesResult(answerAnglesList,userAnglesList)
     }
 
     private fun extractLandmark(
