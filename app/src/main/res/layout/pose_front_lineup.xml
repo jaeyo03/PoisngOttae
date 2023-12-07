@@ -13,6 +13,6 @@
         android:layout_width="400dp"
         android:layout_height="400dp"
         android:gravity="center"
-        app:srcCompat="@drawable/pose_line_up" />
+        app:srcCompat="@drawable/pose_front_line_up" />
 
 </LinearLayout>

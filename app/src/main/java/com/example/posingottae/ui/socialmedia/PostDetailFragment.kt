@@ -3,6 +3,7 @@ package com.example.posingottae.ui.socialmedia
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
@@ -16,6 +17,24 @@ class PostDetailFragment : Fragment() {
     private lateinit var postTitle: TextView
     private lateinit var postContent: TextView
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true) // 이 코드를 추가
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                // 뒤로가기 버튼 클릭 시 BoardFragment로 돌아감
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(R.id.container, BoardFragment())
+                    .addToBackStack(null)
+                    .commit()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

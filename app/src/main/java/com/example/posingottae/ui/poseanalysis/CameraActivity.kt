@@ -66,7 +66,8 @@ class CameraActivity : AppCompatActivity() {
         val targets: List<PoseAnalysis.TargetShape>
     )
 
-    private val targetPose: TargetPose = TargetPose(
+    // 정답 각도
+    private val poseFrontSpread: TargetPose = TargetPose(
         listOf(
             PoseAnalysis.TargetShape(
                 PoseLandmark.LEFT_ANKLE,
@@ -79,9 +80,295 @@ class CameraActivity : AppCompatActivity() {
                 PoseLandmark.LEFT_ELBOW,
                 PoseLandmark.LEFT_SHOULDER,
                 80.0
+            ),
+            PoseAnalysis.TargetShape(
+                PoseLandmark.RIGHT_ANKLE,
+                PoseLandmark.RIGHT_KNEE,
+                PoseLandmark.RIGHT_HIP,
+                170.0
+            )
+            ,
+            PoseAnalysis.TargetShape(
+                PoseLandmark.RIGHT_WRIST,
+                PoseLandmark.RIGHT_ELBOW,
+                PoseLandmark.RIGHT_SHOULDER,
+                80.0
             )
         )
     )
+
+
+    // 자세마다 이렇게 하나하나 만들어줘야함
+    private val poseFrontDoubleBiceps: TargetPose = TargetPose(
+        listOf(
+            PoseAnalysis.TargetShape(
+                PoseLandmark.LEFT_ANKLE,
+                PoseLandmark.LEFT_KNEE,
+                PoseLandmark.LEFT_HIP,
+                170.0
+            ),
+            PoseAnalysis.TargetShape(
+                PoseLandmark.LEFT_WRIST,
+                PoseLandmark.LEFT_ELBOW,
+                PoseLandmark.LEFT_SHOULDER,
+                80.0
+            ),
+            PoseAnalysis.TargetShape(
+                PoseLandmark.RIGHT_ANKLE,
+                PoseLandmark.RIGHT_KNEE,
+                PoseLandmark.RIGHT_HIP,
+                170.0
+            )
+            ,
+            PoseAnalysis.TargetShape(
+                PoseLandmark.RIGHT_WRIST,
+                PoseLandmark.RIGHT_ELBOW,
+                PoseLandmark.RIGHT_SHOULDER,
+                80.0
+            )
+        )
+    )
+
+    private val poseFrontAbd: TargetPose = TargetPose(
+        listOf(
+            PoseAnalysis.TargetShape(
+                PoseLandmark.LEFT_ANKLE,
+                PoseLandmark.LEFT_KNEE,
+                PoseLandmark.LEFT_HIP,
+                170.0
+            ),
+            PoseAnalysis.TargetShape(
+                PoseLandmark.LEFT_WRIST,
+                PoseLandmark.LEFT_ELBOW,
+                PoseLandmark.LEFT_SHOULDER,
+                80.0
+            ),
+            PoseAnalysis.TargetShape(
+                PoseLandmark.RIGHT_ANKLE,
+                PoseLandmark.RIGHT_KNEE,
+                PoseLandmark.RIGHT_HIP,
+                170.0
+            )
+            ,
+            PoseAnalysis.TargetShape(
+                PoseLandmark.RIGHT_WRIST,
+                PoseLandmark.RIGHT_ELBOW,
+                PoseLandmark.RIGHT_SHOULDER,
+                80.0
+            )
+        )
+    )
+
+    private val poseFrontLineup: TargetPose = TargetPose(
+        listOf(
+            PoseAnalysis.TargetShape(
+                PoseLandmark.LEFT_ANKLE,
+                PoseLandmark.LEFT_KNEE,
+                PoseLandmark.LEFT_HIP,
+                170.0
+            ),
+            PoseAnalysis.TargetShape(
+                PoseLandmark.LEFT_WRIST,
+                PoseLandmark.LEFT_ELBOW,
+                PoseLandmark.LEFT_SHOULDER,
+                80.0
+            ),
+            PoseAnalysis.TargetShape(
+                PoseLandmark.RIGHT_ANKLE,
+                PoseLandmark.RIGHT_KNEE,
+                PoseLandmark.RIGHT_HIP,
+                170.0
+            )
+            ,
+            PoseAnalysis.TargetShape(
+                PoseLandmark.RIGHT_WRIST,
+                PoseLandmark.RIGHT_ELBOW,
+                PoseLandmark.RIGHT_SHOULDER,
+                80.0
+            )
+        )
+    )
+
+    private val poseFrontTriceps: TargetPose = TargetPose(
+        listOf(
+            PoseAnalysis.TargetShape(
+                PoseLandmark.LEFT_ANKLE,
+                PoseLandmark.LEFT_KNEE,
+                PoseLandmark.LEFT_HIP,
+                170.0
+            ),
+            PoseAnalysis.TargetShape(
+                PoseLandmark.LEFT_WRIST,
+                PoseLandmark.LEFT_ELBOW,
+                PoseLandmark.LEFT_SHOULDER,
+                80.0
+            ),
+            PoseAnalysis.TargetShape(
+                PoseLandmark.RIGHT_ANKLE,
+                PoseLandmark.RIGHT_KNEE,
+                PoseLandmark.RIGHT_HIP,
+                170.0
+            )
+            ,
+            PoseAnalysis.TargetShape(
+                PoseLandmark.RIGHT_WRIST,
+                PoseLandmark.RIGHT_ELBOW,
+                PoseLandmark.RIGHT_SHOULDER,
+                80.0
+            )
+        )
+    )
+
+    private val poseBackDouble: TargetPose = TargetPose(
+        listOf(
+            PoseAnalysis.TargetShape(
+                PoseLandmark.LEFT_ANKLE,
+                PoseLandmark.LEFT_KNEE,
+                PoseLandmark.LEFT_HIP,
+                170.0
+            ),
+            PoseAnalysis.TargetShape(
+                PoseLandmark.LEFT_WRIST,
+                PoseLandmark.LEFT_ELBOW,
+                PoseLandmark.LEFT_SHOULDER,
+                80.0
+            ),
+            PoseAnalysis.TargetShape(
+                PoseLandmark.RIGHT_ANKLE,
+                PoseLandmark.RIGHT_KNEE,
+                PoseLandmark.RIGHT_HIP,
+                170.0
+            )
+            ,
+            PoseAnalysis.TargetShape(
+                PoseLandmark.RIGHT_WRIST,
+                PoseLandmark.RIGHT_ELBOW,
+                PoseLandmark.RIGHT_SHOULDER,
+                80.0
+            )
+        )
+    )
+
+    private val poseBacklat: TargetPose = TargetPose(
+        listOf(
+            PoseAnalysis.TargetShape(
+                PoseLandmark.LEFT_ANKLE,
+                PoseLandmark.LEFT_KNEE,
+                PoseLandmark.LEFT_HIP,
+                170.0
+            ),
+            PoseAnalysis.TargetShape(
+                PoseLandmark.LEFT_WRIST,
+                PoseLandmark.LEFT_ELBOW,
+                PoseLandmark.LEFT_SHOULDER,
+                80.0
+            ),
+            PoseAnalysis.TargetShape(
+                PoseLandmark.RIGHT_ANKLE,
+                PoseLandmark.RIGHT_KNEE,
+                PoseLandmark.RIGHT_HIP,
+                170.0
+            )
+            ,
+            PoseAnalysis.TargetShape(
+                PoseLandmark.RIGHT_WRIST,
+                PoseLandmark.RIGHT_ELBOW,
+                PoseLandmark.RIGHT_SHOULDER,
+                80.0
+            )
+        )
+    )
+
+    private val poseMuscular1: TargetPose = TargetPose(
+        listOf(
+            PoseAnalysis.TargetShape(
+                PoseLandmark.LEFT_ANKLE,
+                PoseLandmark.LEFT_KNEE,
+                PoseLandmark.LEFT_HIP,
+                170.0
+            ),
+            PoseAnalysis.TargetShape(
+                PoseLandmark.LEFT_WRIST,
+                PoseLandmark.LEFT_ELBOW,
+                PoseLandmark.LEFT_SHOULDER,
+                80.0
+            ),
+            PoseAnalysis.TargetShape(
+                PoseLandmark.RIGHT_ANKLE,
+                PoseLandmark.RIGHT_KNEE,
+                PoseLandmark.RIGHT_HIP,
+                170.0
+            )
+            ,
+            PoseAnalysis.TargetShape(
+                PoseLandmark.RIGHT_WRIST,
+                PoseLandmark.RIGHT_ELBOW,
+                PoseLandmark.RIGHT_SHOULDER,
+                80.0
+            )
+        )
+    )
+
+    private val poseMuscular2: TargetPose = TargetPose(
+        listOf(
+            PoseAnalysis.TargetShape(
+                PoseLandmark.LEFT_ANKLE,
+                PoseLandmark.LEFT_KNEE,
+                PoseLandmark.LEFT_HIP,
+                170.0
+            ),
+            PoseAnalysis.TargetShape(
+                PoseLandmark.LEFT_WRIST,
+                PoseLandmark.LEFT_ELBOW,
+                PoseLandmark.LEFT_SHOULDER,
+                80.0
+            ),
+            PoseAnalysis.TargetShape(
+                PoseLandmark.RIGHT_ANKLE,
+                PoseLandmark.RIGHT_KNEE,
+                PoseLandmark.RIGHT_HIP,
+                170.0
+            )
+            ,
+            PoseAnalysis.TargetShape(
+                PoseLandmark.RIGHT_WRIST,
+                PoseLandmark.RIGHT_ELBOW,
+                PoseLandmark.RIGHT_SHOULDER,
+                80.0
+            )
+        )
+    )
+
+    private val poseSideChest: TargetPose = TargetPose(
+        listOf(
+            PoseAnalysis.TargetShape(
+                PoseLandmark.LEFT_ANKLE,
+                PoseLandmark.LEFT_KNEE,
+                PoseLandmark.LEFT_HIP,
+                170.0
+            ),
+            PoseAnalysis.TargetShape(
+                PoseLandmark.LEFT_WRIST,
+                PoseLandmark.LEFT_ELBOW,
+                PoseLandmark.LEFT_SHOULDER,
+                80.0
+            ),
+            PoseAnalysis.TargetShape(
+                PoseLandmark.RIGHT_ANKLE,
+                PoseLandmark.RIGHT_KNEE,
+                PoseLandmark.RIGHT_HIP,
+                170.0
+            )
+            ,
+            PoseAnalysis.TargetShape(
+                PoseLandmark.RIGHT_WRIST,
+                PoseLandmark.RIGHT_ELBOW,
+                PoseLandmark.RIGHT_SHOULDER,
+                80.0
+            )
+        )
+    )
+
     var poseAnswer = false
     private var isAutoCaptureEnabled = true
     var yourAngle = 0.0
@@ -95,15 +382,17 @@ class CameraActivity : AppCompatActivity() {
 //            // 여기서 landmarkType은 그냥 0~32 까지의 숫자로만 나옴
 //        }
 
+        val poseAnalysis = PoseAnalysis(pose,poseFrontSpread)
         // 유사도 분석으로 넘어가는 코드
-        poseAnswer = PoseAnalysis(pose,targetPose).match(pose,targetPose)
+        poseAnswer = poseAnalysis.match(pose,poseFrontSpread)
         //유사도 true,false로 결과 출력
-        yourAngle = PoseAnalysis(pose,targetPose).yourAngle
+//        yourAngle = PoseAnalysis(pose,targetPose).yourAngle
+        Log.d("YourAngle",yourAngle.toString())
         checkAndCapture(poseAnswer)
 
     }
 
-
+    // Start onCreate
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewBinding = ActivityCameraBinding.inflate(layoutInflater)
@@ -119,12 +408,12 @@ class CameraActivity : AppCompatActivity() {
             )
         }
 
-        val targetAngle = 0.0
-        targetPose.targets.forEach { target ->
-            val targetAngle = target.angle}
+
+
 
         // Set up the listeners for take photo
         viewBinding.imageCaptureButton.setOnClickListener {
+
             AlertDialog.Builder(this)
                 .setTitle("Take Photo?")
                 .setMessage("Do you want to take the photo?")
@@ -133,7 +422,6 @@ class CameraActivity : AppCompatActivity() {
                     val intent = Intent(this, ResultActivity::class.java)
                     intent.apply {
                         putExtra("PoseResult" , poseAnswer )
-                        putExtra("TargetAnlge",targetAngle)
                         putExtra("YourAngle",yourAngle)
                     }
                     startActivity(intent)

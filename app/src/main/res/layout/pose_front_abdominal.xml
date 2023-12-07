@@ -11,6 +11,6 @@
         android:layout_width="400dp"
         android:layout_height="400dp"
         android:gravity="center"
-        app:srcCompat="@drawable/pose_abdominal" />
+        app:srcCompat="@drawable/pose_front_abdominal" />
 
 </LinearLayout>
