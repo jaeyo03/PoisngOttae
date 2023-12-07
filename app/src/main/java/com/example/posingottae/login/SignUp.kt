@@ -11,7 +11,9 @@ import com.example.posingottae.login.Login
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.auth.auth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class SignUp : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
@@ -29,17 +31,51 @@ class SignUp : AppCompatActivity() {
             val confirmPassword = findViewById<TextInputEditText>(R.id.password2).text.toString()
 
             if (password == confirmPassword){
-
-                auth.createUserWithEmailAndPassword(email,password)
-                    .addOnCompleteListener(this) {task ->
+                auth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
                             val user = auth.currentUser
-                            Log.d("signup", "createUserWithEmail : success")
-                            val intent = Intent(this, Login::class.java)
-                            startActivity(intent)
-                        }
-                        else {
-                            Log.d("signup", "createUserwithEmail : failure",task.exception)
+
+                            // Set display name for the user
+                            val userName = findViewById<TextInputEditText>(R.id.username).text.toString()
+                            val profileUpdate = UserProfileChangeRequest.Builder()
+                                .setDisplayName(userName)
+                                .build()
+
+                            user?.updateProfile(profileUpdate)
+                                ?.addOnCompleteListener { profileUpdateTask ->
+                                    if (profileUpdateTask.isSuccessful) {
+                                        Log.d("signup", "User profile updated.")
+                                    } else {
+                                        Log.w("signup", "Failed to update user profile.", profileUpdateTask.exception)
+                                    }
+                                }
+
+                            // Save user data to Firestore
+                            val firestore = FirebaseFirestore.getInstance()
+                            val userMap = hashMapOf(
+                                "email" to email,
+                                "username" to userName
+                                // Add any other user-related data you want to store in Firestore
+                            )
+
+                            firestore.collection("users").document(user!!.uid)
+                                .set(userMap)
+                                .addOnSuccessListener {
+                                    Log.d("signup", "User data added to Firestore.")
+                                    val intent = Intent(this, Login::class.java)
+                                    startActivity(intent)
+                                }
+                                .addOnFailureListener { e ->
+                                    Log.w("signup", "Error adding user data to Firestore", e)
+                                    Toast.makeText(
+                                        baseContext,
+                                        "Failed to add user data to Firestore.",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+                        } else {
+                            Log.d("signup", "createUserwithEmail: failure", task.exception)
                             Toast.makeText(
                                 baseContext,
                                 "Authentication Failed.",
@@ -47,16 +83,13 @@ class SignUp : AppCompatActivity() {
                             ).show()
                         }
                     }
-            }
-            else {
+            } else {
                 Toast.makeText(
                     baseContext,
                     "Passwords do not match.\n Check Again",
                     Toast.LENGTH_SHORT
                 ).show()
             }
-
         }
     }
-
 }
