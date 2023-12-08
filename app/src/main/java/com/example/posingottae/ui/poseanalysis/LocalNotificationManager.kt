@@ -51,6 +51,7 @@ class LocalNotificationManager(private val context: Context) {
         val shareIntent = Intent(Intent.ACTION_SEND)
         shareIntent.type = "image/*"
 
+        val flags = PendingIntent.FLAG_IMMUTABLE
         // 캡처된 이미지의 URI를 설정
         shareIntent.putExtra(Intent.EXTRA_STREAM, capturedImageUri)
 
@@ -61,7 +62,7 @@ class LocalNotificationManager(private val context: Context) {
             context,
             0,
             Intent.createChooser(shareIntent, "Share on Instagram"),
-            PendingIntent.FLAG_UPDATE_CURRENT
+            flags
         )
     }
 

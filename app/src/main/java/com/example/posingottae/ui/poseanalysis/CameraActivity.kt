@@ -417,7 +417,7 @@ class CameraActivity : AppCompatActivity() {
             userAnglesList = angleResult.userAnglesList
             answerAnglesList = angleResult.answerAnglesList
             //밑에 알람으로 가는 코드... 보완이 필요
-//            checkAndCapture(poseAnswer)
+            checkAndCapture(poseAnswer)
         } else{
             Toast.makeText(this, "No selected Pose! Please select the Pose!", Toast.LENGTH_SHORT).show()
         }
@@ -696,8 +696,8 @@ class CameraActivity : AppCompatActivity() {
         if (answerScore && isAutoCaptureEnabled) {
             // 자동으로 캡쳐
             takePhoto()
-            // 푸시 알림 전송
-            getFCMToken()
+//            // 푸시 알림 전송
+//            getFCMToken()
             localNotificationManager.sendGoodPositionNotification()
             // 자동 캡쳐를 비활성화하거나 필요에 따라 플래그를 수정할 수 있음
             isAutoCaptureEnabled = false
