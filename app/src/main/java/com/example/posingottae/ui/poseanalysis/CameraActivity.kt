@@ -532,6 +532,9 @@ class CameraActivity : AppCompatActivity() {
             }
         )
     }
+    object ImageUriHolder {
+        var capturedImageUri: Uri? = null
+    }
 
     //카메라 시작하는 함수
     private fun startCamera() {
@@ -680,6 +683,12 @@ class CameraActivity : AppCompatActivity() {
 
     // -----------------------------------------------------------------  여기서 부터 실시간 캡쳐와 푸쉬 알림 ------------------------------------------------
 
+
+    // 로컬푸시알림 구현
+
+    private val localNotificationManager: LocalNotificationManager by lazy {
+        LocalNotificationManager(this)
+    }
     // 자동 캡쳐 및 푸시 알림 여부를 검사하는 함수
     private fun checkAndCapture(answerScore:Boolean) {
         // 최적의 포즈와 현재 포즈가 일치하는지 확인
@@ -688,6 +697,7 @@ class CameraActivity : AppCompatActivity() {
             takePhoto()
             // 푸시 알림 전송
             getFCMToken()
+            localNotificationManager.sendGoodPositionNotification()
             // 자동 캡쳐를 비활성화하거나 필요에 따라 플래그를 수정할 수 있음
             isAutoCaptureEnabled = false
         }
