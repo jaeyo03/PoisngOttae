@@ -25,6 +25,7 @@ import com.example.posingottae.ui.poseanalysis.PictureFragment.PoseMusFragment1
 import com.example.posingottae.ui.poseanalysis.PictureFragment.PoseMusFragment2
 import com.example.posingottae.ui.poseanalysis.PictureFragment.PoseSideFragment
 import java.io.IOException
+import kotlin.math.abs
 
 
 class ResultActivity : AppCompatActivity() {
@@ -84,6 +85,38 @@ class ResultActivity : AppCompatActivity() {
         binding.answerLeftLeg.text = answerLeftLeg.toString()
         binding.answerRightArm.text = answerRightArm.toString()
         binding.answerRightLeg.text = answerRightLeg.toString()
+
+
+        // 각 숫자의 차이 계산
+        val diffLeftLeg = abs(userLeftLeg!! - answerLeftLeg!!)
+        val diffLeftArm = abs(userLeftArm!! - answerLeftArm!!)
+        val diffRightLeg = abs(userRightLeg!! - answerRightLeg!!)
+        val diffRightArm = abs(userRightArm!! - answerRightArm!!)
+
+        val avgDiff = (diffLeftLeg + diffLeftArm + diffRightLeg + diffRightArm) / 4.0
+
+        val rating = when{
+            avgDiff < 5.0 -> 5
+            avgDiff < 10.0 -> 4
+            avgDiff < 13.0 -> 3
+            avgDiff < 18.0 -> 2
+            avgDiff < 20.0 -> 1
+            else -> 0
+        }
+
+        binding.reviewText.text = when(rating){
+            5 -> "Your pose is awesome!!"
+            4 -> "Your pose is great!"
+            3 -> "Your pose is not bad"
+            2 -> "Your pose is not good"
+            1 -> "Your pose is bad"
+            else -> "You need to check your pose..."
+        }
+
+        val ratingBar = binding.ratingAngleBar
+
+        ratingBar.rating = rating.toFloat()
+
 
         val backBtn = binding.backBtn
         backBtn.setOnClickListener {

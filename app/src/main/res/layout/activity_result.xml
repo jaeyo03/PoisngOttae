@@ -29,7 +29,7 @@
         tools:srcCompat="@tools:sample/avatars" />
 
     <RatingBar
-        android:id="@+id/ratingBar2"
+        android:id="@+id/ratingAngleBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -139,7 +139,7 @@
         android:text="Answer Pose"
         app:layout_constraintEnd_toStartOf="@+id/textView17"
         app:layout_constraintStart_toStartOf="@+id/relativeLayout"
-        app:layout_constraintTop_toBottomOf="@+id/ratingBar2" />
+        app:layout_constraintTop_toBottomOf="@+id/ratingAngleBar" />
 
     <TextView
         android:id="@+id/textView17"
@@ -149,7 +149,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="13dp"
         android:text="Your Pose"
-        app:layout_constraintEnd_toEndOf="@+id/ratingBar2"
+        app:layout_constraintEnd_toEndOf="@+id/ratingAngleBar"
         app:layout_constraintStart_toEndOf="@+id/relativeLayout"
         app:layout_constraintTop_toBottomOf="@+id/reviewText" />
 

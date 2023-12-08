@@ -171,7 +171,7 @@ class CameraActivity : AppCompatActivity() {
                 PoseLandmark.LEFT_WRIST,
                 PoseLandmark.LEFT_ELBOW,
                 PoseLandmark.LEFT_SHOULDER,
-                80.0
+                130.0
             ),
             PoseAnalysis.TargetShape(
                 PoseLandmark.RIGHT_ANKLE,
@@ -184,7 +184,7 @@ class CameraActivity : AppCompatActivity() {
                 PoseLandmark.RIGHT_WRIST,
                 PoseLandmark.RIGHT_ELBOW,
                 PoseLandmark.RIGHT_SHOULDER,
-                80.0
+                130.0
             )
         )
     )
@@ -416,7 +416,8 @@ class CameraActivity : AppCompatActivity() {
             angleResult = poseAnalysis.showAngle(pose,selectedPose)
             userAnglesList = angleResult.userAnglesList
             answerAnglesList = angleResult.answerAnglesList
-            checkAndCapture(poseAnswer)
+            //밑에 알람으로 가는 코드... 보완이 필요
+//            checkAndCapture(poseAnswer)
         } else{
             Toast.makeText(this, "No selected Pose! Please select the Pose!", Toast.LENGTH_SHORT).show()
         }
