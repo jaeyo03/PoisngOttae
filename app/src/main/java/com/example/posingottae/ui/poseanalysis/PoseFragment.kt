@@ -111,6 +111,7 @@ private var _binding: FragmentPoseBinding? = null
                     showPoseType == "Side" && position == 0 -> "SideChest"
                     else -> "Empty"
                 }
+                Log.d("FragmentName",fragmentInfo)
             }
         })
 

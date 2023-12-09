@@ -105,26 +105,26 @@ class CameraActivity : AppCompatActivity() {
                 PoseLandmark.LEFT_ANKLE,
                 PoseLandmark.LEFT_KNEE,
                 PoseLandmark.LEFT_HIP,
-                170.0
+                167.0
             ),
             PoseAnalysis.TargetShape(
                 PoseLandmark.LEFT_WRIST,
                 PoseLandmark.LEFT_ELBOW,
                 PoseLandmark.LEFT_SHOULDER,
-                80.0
+                71.0
             ),
             PoseAnalysis.TargetShape(
                 PoseLandmark.RIGHT_ANKLE,
                 PoseLandmark.RIGHT_KNEE,
                 PoseLandmark.RIGHT_HIP,
-                170.0
+                167.0
             )
             ,
             PoseAnalysis.TargetShape(
                 PoseLandmark.RIGHT_WRIST,
                 PoseLandmark.RIGHT_ELBOW,
                 PoseLandmark.RIGHT_SHOULDER,
-                80.0
+                71.0
             )
         )
     )
@@ -135,26 +135,26 @@ class CameraActivity : AppCompatActivity() {
                 PoseLandmark.LEFT_ANKLE,
                 PoseLandmark.LEFT_KNEE,
                 PoseLandmark.LEFT_HIP,
-                170.0
+                172.0
             ),
             PoseAnalysis.TargetShape(
                 PoseLandmark.LEFT_WRIST,
                 PoseLandmark.LEFT_ELBOW,
                 PoseLandmark.LEFT_SHOULDER,
-                80.0
+                70.0
             ),
             PoseAnalysis.TargetShape(
                 PoseLandmark.RIGHT_ANKLE,
                 PoseLandmark.RIGHT_KNEE,
                 PoseLandmark.RIGHT_HIP,
-                170.0
+                180.0
             )
             ,
             PoseAnalysis.TargetShape(
                 PoseLandmark.RIGHT_WRIST,
                 PoseLandmark.RIGHT_ELBOW,
                 PoseLandmark.RIGHT_SHOULDER,
-                80.0
+                55.0
             )
         )
     )
@@ -165,26 +165,26 @@ class CameraActivity : AppCompatActivity() {
                 PoseLandmark.LEFT_ANKLE,
                 PoseLandmark.LEFT_KNEE,
                 PoseLandmark.LEFT_HIP,
-                170.0
+                168.0
             ),
             PoseAnalysis.TargetShape(
                 PoseLandmark.LEFT_WRIST,
                 PoseLandmark.LEFT_ELBOW,
                 PoseLandmark.LEFT_SHOULDER,
-                130.0
+                106.0
             ),
             PoseAnalysis.TargetShape(
                 PoseLandmark.RIGHT_ANKLE,
                 PoseLandmark.RIGHT_KNEE,
                 PoseLandmark.RIGHT_HIP,
-                170.0
+                168.0
             )
             ,
             PoseAnalysis.TargetShape(
                 PoseLandmark.RIGHT_WRIST,
                 PoseLandmark.RIGHT_ELBOW,
                 PoseLandmark.RIGHT_SHOULDER,
-                130.0
+                106.0
             )
         )
     )
@@ -195,26 +195,26 @@ class CameraActivity : AppCompatActivity() {
                 PoseLandmark.LEFT_ANKLE,
                 PoseLandmark.LEFT_KNEE,
                 PoseLandmark.LEFT_HIP,
-                170.0
+                144.0
             ),
             PoseAnalysis.TargetShape(
                 PoseLandmark.LEFT_WRIST,
                 PoseLandmark.LEFT_ELBOW,
                 PoseLandmark.LEFT_SHOULDER,
-                80.0
+                171.7
             ),
             PoseAnalysis.TargetShape(
                 PoseLandmark.RIGHT_ANKLE,
                 PoseLandmark.RIGHT_KNEE,
                 PoseLandmark.RIGHT_HIP,
-                170.0
+                124.9
             )
             ,
             PoseAnalysis.TargetShape(
                 PoseLandmark.RIGHT_WRIST,
                 PoseLandmark.RIGHT_ELBOW,
                 PoseLandmark.RIGHT_SHOULDER,
-                80.0
+                164.5
             )
         )
     )
@@ -225,26 +225,26 @@ class CameraActivity : AppCompatActivity() {
                 PoseLandmark.LEFT_ANKLE,
                 PoseLandmark.LEFT_KNEE,
                 PoseLandmark.LEFT_HIP,
-                170.0
+                166.1
             ),
             PoseAnalysis.TargetShape(
                 PoseLandmark.LEFT_WRIST,
                 PoseLandmark.LEFT_ELBOW,
                 PoseLandmark.LEFT_SHOULDER,
-                80.0
+                72.6
             ),
             PoseAnalysis.TargetShape(
                 PoseLandmark.RIGHT_ANKLE,
                 PoseLandmark.RIGHT_KNEE,
                 PoseLandmark.RIGHT_HIP,
-                170.0
+                173.2
             )
             ,
             PoseAnalysis.TargetShape(
                 PoseLandmark.RIGHT_WRIST,
                 PoseLandmark.RIGHT_ELBOW,
                 PoseLandmark.RIGHT_SHOULDER,
-                80.0
+                67.8
             )
         )
     )
@@ -255,26 +255,26 @@ class CameraActivity : AppCompatActivity() {
                 PoseLandmark.LEFT_ANKLE,
                 PoseLandmark.LEFT_KNEE,
                 PoseLandmark.LEFT_HIP,
-                170.0
+                163.4
             ),
             PoseAnalysis.TargetShape(
                 PoseLandmark.LEFT_WRIST,
                 PoseLandmark.LEFT_ELBOW,
                 PoseLandmark.LEFT_SHOULDER,
-                80.0
+                71.0
             ),
             PoseAnalysis.TargetShape(
                 PoseLandmark.RIGHT_ANKLE,
                 PoseLandmark.RIGHT_KNEE,
                 PoseLandmark.RIGHT_HIP,
-                170.0
+                175.3
             )
             ,
             PoseAnalysis.TargetShape(
                 PoseLandmark.RIGHT_WRIST,
                 PoseLandmark.RIGHT_ELBOW,
                 PoseLandmark.RIGHT_SHOULDER,
-                80.0
+                79.9
             )
         )
     )
@@ -285,26 +285,26 @@ class CameraActivity : AppCompatActivity() {
                 PoseLandmark.LEFT_ANKLE,
                 PoseLandmark.LEFT_KNEE,
                 PoseLandmark.LEFT_HIP,
-                170.0
+                170.4
             ),
             PoseAnalysis.TargetShape(
                 PoseLandmark.LEFT_WRIST,
                 PoseLandmark.LEFT_ELBOW,
                 PoseLandmark.LEFT_SHOULDER,
-                80.0
+                96.5
             ),
             PoseAnalysis.TargetShape(
                 PoseLandmark.RIGHT_ANKLE,
                 PoseLandmark.RIGHT_KNEE,
                 PoseLandmark.RIGHT_HIP,
-                170.0
+                177.8
             )
             ,
             PoseAnalysis.TargetShape(
                 PoseLandmark.RIGHT_WRIST,
                 PoseLandmark.RIGHT_ELBOW,
                 PoseLandmark.RIGHT_SHOULDER,
-                80.0
+                88.6
             )
         )
     )
@@ -315,26 +315,26 @@ class CameraActivity : AppCompatActivity() {
                 PoseLandmark.LEFT_ANKLE,
                 PoseLandmark.LEFT_KNEE,
                 PoseLandmark.LEFT_HIP,
-                170.0
+                176.1
             ),
             PoseAnalysis.TargetShape(
                 PoseLandmark.LEFT_WRIST,
                 PoseLandmark.LEFT_ELBOW,
                 PoseLandmark.LEFT_SHOULDER,
-                80.0
+                76.9
             ),
             PoseAnalysis.TargetShape(
                 PoseLandmark.RIGHT_ANKLE,
                 PoseLandmark.RIGHT_KNEE,
                 PoseLandmark.RIGHT_HIP,
-                170.0
+                179.2
             )
             ,
             PoseAnalysis.TargetShape(
                 PoseLandmark.RIGHT_WRIST,
                 PoseLandmark.RIGHT_ELBOW,
                 PoseLandmark.RIGHT_SHOULDER,
-                80.0
+                72.2
             )
         )
     )
@@ -345,26 +345,26 @@ class CameraActivity : AppCompatActivity() {
                 PoseLandmark.LEFT_ANKLE,
                 PoseLandmark.LEFT_KNEE,
                 PoseLandmark.LEFT_HIP,
-                170.0
+                146.5
             ),
             PoseAnalysis.TargetShape(
                 PoseLandmark.LEFT_WRIST,
                 PoseLandmark.LEFT_ELBOW,
                 PoseLandmark.LEFT_SHOULDER,
-                80.0
+                101.7
             ),
             PoseAnalysis.TargetShape(
                 PoseLandmark.RIGHT_ANKLE,
                 PoseLandmark.RIGHT_KNEE,
                 PoseLandmark.RIGHT_HIP,
-                170.0
+                119.7
             )
             ,
             PoseAnalysis.TargetShape(
                 PoseLandmark.RIGHT_WRIST,
                 PoseLandmark.RIGHT_ELBOW,
                 PoseLandmark.RIGHT_SHOULDER,
-                80.0
+                89.2
             )
         )
     )
@@ -450,17 +450,6 @@ class CameraActivity : AppCompatActivity() {
                 .setMessage("Do you want to take the photo?")
                 .setPositiveButton("Agree") { dialog, which ->
                     takePhoto()
-                    val intent = Intent(this, ResultActivity::class.java)
-                    intent.apply {
-                        putExtra("UserAngle" , userAnglesList.toString() )
-                        putExtra("AnswerAngle", answerAnglesList.toString())
-                        putExtra("PoseInformation",poseInformation)
-                        action = Intent.ACTION_SEND
-                        putExtra(Intent.EXTRA_STREAM, photoUri)
-                        type = "image/jpeg"
-                        addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-                    }
-                    startActivity(intent)
                 }
                 .setNegativeButton("Disagree", null)
                 .show()
@@ -473,18 +462,9 @@ class CameraActivity : AppCompatActivity() {
                 .setMessage("Do you want to open the gallery?")
                 .setPositiveButton("Agree") { dialog, which ->
                     openGalleryForImage()
-                                val intent = Intent(this, ResultActivity::class.java)
-//            intent.apply {
-//                putExtra("PoseResult" , poseAnswer)
-//                putExtra("TargetAngle", targetAngle)
-//                putExtra("YourAngle",yourAngle)
-//            }
-//            startActivity(intent)
                 }
                 .setNegativeButton("Disagree", null)
                 .show()
-
-
         }
         cameraExecutor = Executors.newSingleThreadExecutor()
 
@@ -526,6 +506,7 @@ class CameraActivity : AppCompatActivity() {
                 override fun onImageSaved(output: ImageCapture.OutputFileResults){
                     val msg = "Photo capture succeeded: ${output.savedUri}"
                     Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
+                    photoUri = output.savedUri
                     val savedUri = output.savedUri ?: return
                     analyzePoseFromUri(savedUri)
                     Log.d(TAG, msg)
@@ -600,6 +581,7 @@ class CameraActivity : AppCompatActivity() {
         if (resultCode == RESULT_OK && requestCode == GALLERY_REQUEST_CODE) {
             data?.data?.let { uri ->
                 analyzePoseFromUri(uri)
+                photoUri = uri
             }
             val intent = Intent(this, ResultActivity::class.java)
             intent.apply {
@@ -618,10 +600,20 @@ class CameraActivity : AppCompatActivity() {
     // URI로부터 사진을 분석하는 함수
     private fun analyzePoseFromUri(uri: Uri) {
         val image = InputImage.fromFilePath(this, uri)
-        photoUri = uri
         poseDetector.process(image)
             .addOnSuccessListener { pose ->
                 onPoseDetected(pose)
+                val intent = Intent(this, ResultActivity::class.java)
+                intent.apply {
+                    putExtra("UserAngle" , userAnglesList.toString() )
+                    putExtra("AnswerAngle", answerAnglesList.toString())
+                    putExtra("PoseInformation",poseInformation)
+                    action = Intent.ACTION_SEND
+                    putExtra(Intent.EXTRA_STREAM, photoUri)
+                    type = "image/jpeg"
+                    addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                }
+                startActivity(intent)
             }
             .addOnFailureListener { e ->
                 // 에러 처리
