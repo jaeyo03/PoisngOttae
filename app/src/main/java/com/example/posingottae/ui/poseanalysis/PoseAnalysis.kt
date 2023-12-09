@@ -27,7 +27,7 @@ class PoseAnalysis(pose: Pose, targetPose: CameraActivity.TargetPose) {
         return extractAndMatch(pose, targetPose)
     }
 
-    private val offset = 5.0
+    private val offset = 4.0
 
     private fun extractAndMatch(pose: Pose, targetPose: CameraActivity.TargetPose) : Boolean {
         targetPose.targets.forEach { target ->

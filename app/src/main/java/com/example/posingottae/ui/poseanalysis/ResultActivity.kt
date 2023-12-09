@@ -43,7 +43,7 @@ class ResultActivity : AppCompatActivity() {
         // 인텐트에서 이미지 URI 받기
         val imageUri: Uri? = intent.getParcelableExtra(Intent.EXTRA_STREAM)
 
-        Log.d("imageURI" ,imageUri.toString())
+        Log.d("ImageURI",imageUri.toString())
         // URI가 null이 아닌 경우에 이미지를 띄움
         imageUri?.let {
             val bitmap = getBitmapFromUri(this, it)
@@ -96,11 +96,11 @@ class ResultActivity : AppCompatActivity() {
         val avgDiff = (diffLeftLeg + diffLeftArm + diffRightLeg + diffRightArm) / 4.0
 
         val rating = when{
-            avgDiff < 5.0 -> 5
-            avgDiff < 10.0 -> 4
-            avgDiff < 13.0 -> 3
-            avgDiff < 18.0 -> 2
-            avgDiff < 20.0 -> 1
+            avgDiff < 3.0 -> 5
+            avgDiff < 5.0 -> 4
+            avgDiff < 7.0 -> 3
+            avgDiff < 9.0 -> 2
+            avgDiff < 10.0 -> 1
             else -> 0
         }
 
