@@ -76,10 +76,10 @@ class ResultActivity : AppCompatActivity() {
         val answerRightLeg = answerAnglesString?.get(2)?.toDouble()
         val answerRightArm = answerAnglesString?.get(3)?.toDouble()
 
-        binding.userLeftArm.text = userLeftArm.toString()
-        binding.userLeftLeg.text= userLeftLeg.toString()
-        binding.userRightArm.text = userRightArm.toString()
-        binding.userRightLeg.text = userRightLeg.toString()
+        binding.userLeftArm.text = String.format("%.4f", userLeftArm)
+        binding.userLeftLeg.text= String.format("%.4f", userLeftLeg)
+        binding.userRightArm.text = String.format("%.4f",userRightArm )
+        binding.userRightLeg.text = String.format("%.4f", userRightLeg)
 
         binding.answerLeftArm.text = answerLeftArm.toString()
         binding.answerLeftLeg.text = answerLeftLeg.toString()

@@ -20,8 +20,8 @@
 
     <ImageView
         android:id="@+id/yourPose"
-        android:layout_width="181dp"
-        android:layout_height="250dp"
+        android:layout_width="183dp"
+        android:layout_height="244dp"
         android:layout_marginTop="132dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -39,120 +39,176 @@
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
 
     <TextView
-        android:id="@+id/answerLeftArm"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="6dp"
-        android:layout_marginTop="15dp"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="@+id/textView16"
-        app:layout_constraintTop_toBottomOf="@+id/textView16" />
-
-    <TextView
-        android:id="@+id/userLeftArm"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
-        android:layout_marginTop="17dp"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="@+id/textView17"
-        app:layout_constraintTop_toBottomOf="@+id/textView17" />
-
-    <TextView
-        android:id="@+id/answerLeftLeg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="17dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/answerRightArm"
-        app:layout_constraintStart_toStartOf="@+id/answerRightArm" />
-
-    <TextView
-        android:id="@+id/userLeftLeg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="26dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/userRightArm"
-        app:layout_constraintStart_toStartOf="@+id/userRightArm" />
-
-    <TextView
-        android:id="@+id/userRightLeg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="23dp"
-        android:layout_marginBottom="28dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/answerRightLeg" />
-
-    <TextView
-        android:id="@+id/userRightArm"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="23dp"
-        android:layout_marginBottom="17dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/userRightLeg"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/answerRightArm" />
-
-    <TextView
-        android:id="@+id/answerRightLeg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginBottom="28dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/userRightLeg"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/answerRightArm"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginBottom="25dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/answerRightLeg"
-        app:layout_constraintEnd_toStartOf="@+id/userRightArm"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
         android:id="@+id/reviewText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="14dp"
+        android:layout_marginTop="16dp"
         android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/textView16"
-        app:layout_constraintEnd_toStartOf="@+id/textView17" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ratingAngleBar" />
 
     <TextView
         android:id="@+id/textView16"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="71dp"
-        android:layout_marginTop="57dp"
-        android:layout_marginEnd="71dp"
+        android:layout_marginStart="116dp"
+        android:layout_marginTop="12dp"
         android:text="Answer Pose"
-        app:layout_constraintEnd_toStartOf="@+id/textView17"
-        app:layout_constraintStart_toStartOf="@+id/relativeLayout"
-        app:layout_constraintTop_toBottomOf="@+id/ratingAngleBar" />
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/reviewText" />
 
     <TextView
         android:id="@+id/textView17"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="13dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="52dp"
         android:text="Your Pose"
-        app:layout_constraintEnd_toEndOf="@+id/ratingAngleBar"
-        app:layout_constraintStart_toEndOf="@+id/relativeLayout"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/reviewText" />
+
+    <TextView
+        android:id="@+id/userLeftArm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="TextView"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/textView17"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/textView17"
+        app:layout_constraintTop_toBottomOf="@+id/textView17" />
+
+    <TextView
+        android:id="@+id/userRightLeg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="TextView"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/userRightArm"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/userRightArm"
+        app:layout_constraintTop_toBottomOf="@+id/userRightArm" />
+
+    <TextView
+        android:id="@+id/userLeftLeg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="TextView"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/userLeftArm"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/userLeftArm"
+        app:layout_constraintTop_toBottomOf="@+id/userLeftArm" />
+
+    <TextView
+        android:id="@+id/userRightArm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="TextView"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/userLeftLeg"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/userLeftLeg"
+        app:layout_constraintTop_toBottomOf="@+id/userLeftLeg" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="36dp"
+        android:text="Right Leg"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/answerRightLeg"
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+    <TextView
+        android:id="@+id/answerLeftArm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="TextView"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/textView16"
+        app:layout_constraintHorizontal_bias="0.828"
+        app:layout_constraintStart_toStartOf="@+id/textView16"
+        app:layout_constraintTop_toBottomOf="@+id/textView16" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="28dp"
+        android:text="Left Arm"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/answerLeftArm"
+        app:layout_constraintTop_toTopOf="@+id/answerLeftArm" />
+
+    <TextView
+        android:id="@+id/answerRightLeg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="TextView"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/answerRightArm"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/answerRightArm"
+        app:layout_constraintTop_toBottomOf="@+id/answerRightArm" />
+
+    <TextView
+        android:id="@+id/answerRightArm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="TextView"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/answerLeftLeg"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/answerLeftLeg"
+        app:layout_constraintTop_toBottomOf="@+id/answerLeftLeg" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="36dp"
+        android:text="Left Leg"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/answerLeftLeg"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+    <TextView
+        android:id="@+id/answerLeftLeg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="TextView"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/answerLeftArm"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/answerLeftArm"
+        app:layout_constraintTop_toBottomOf="@+id/answerLeftArm" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="36dp"
+        android:text="Right Arm"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/answerRightArm"
+        app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
@@ -171,44 +227,5 @@
             tools:layout_editor_absoluteX="58dp"
             tools:layout_editor_absoluteY="128dp" />
     </RelativeLayout>
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="13dp"
-        android:layout_marginTop="18dp"
-        android:text="Left Arm"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView16" />
-
-    <TextView
-        android:id="@+id/textView10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="13dp"
-        android:layout_marginTop="21dp"
-        android:text="Left Leg"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
-
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="9dp"
-        android:text="Right Arm"
-        app:layout_constraintBaseline_toBaselineOf="@+id/answerRightArm"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="9dp"
-        android:layout_marginBottom="26dp"
-        android:text="Right Leg"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
