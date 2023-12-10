@@ -42,5 +42,12 @@
         android:label="@string/title_mypage"
         tools:layout="@layout/fragment_mypage"/>
 
+    <fragment
+            android:id="@+id/navigation_edit_profile"
+            android:name="com.example.posingottae.ui.mypage.EditProfileFragment"
+            android:label="@string/title_mypage"
+            tools:layout="@layout/fragment_edit_profile"/>
+
+
 
 </navigation>

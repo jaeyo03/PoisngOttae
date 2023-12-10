@@ -25,16 +25,14 @@ class PostDetailFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {
-                // 뒤로가기 버튼 클릭 시 BoardFragment로 돌아감
-                requireActivity().supportFragmentManager.beginTransaction()
-                    .replace(R.id.container, BoardFragment())
-                    .addToBackStack(null)
-                    .commit()
+                // 뒤로가기 버튼 클릭 시 현재 Fragment를 닫고 이전 Fragment로 돌아감
+                requireActivity().supportFragmentManager.popBackStack()
                 true
             }
             else -> super.onOptionsItemSelected(item)
         }
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

@@ -3,6 +3,7 @@ package com.example.posingottae.ui.mypage
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
@@ -10,6 +11,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.posingottae.R
 import com.example.posingottae.databinding.FragmentMypageBinding
 import com.example.posingottae.login.Login
@@ -38,6 +40,7 @@ class MypageFragment : Fragment() {
         textViewEmail = view.findViewById(R.id.textViewEmail)
         logoutButton = view.findViewById(R.id.logoutBtn)
 
+
         fetchUserData()
 
         val logoutButton: Button = binding.logoutBtn
@@ -50,8 +53,26 @@ class MypageFragment : Fragment() {
             startActivity(intent)
         }
 
+        val editProfileButton: Button = binding.editProfileBtn
+        editProfileButton.setOnClickListener {
+            // 현재 프래그먼트를 EditProfileFragment로 대체합니다.
+            findNavController().navigate(R.id.navigation_edit_profile)
+        }
+
+
+
+
+        parentFragmentManager.setFragmentResultListener("EDIT_PROFILE_REQUEST", this) { _, bundle ->
+            // 프로필이 업데이트되었는지 확인하고, 업데이트된 경우에만 데이터를 새로고침합니다.
+            if (bundle.getBoolean("profileUpdated", false)) {
+                fetchUserData()
+            }
+        }
+
         return view
     }
+
+
 
     private fun fetchUserData() {
         val currentUser = FirebaseAuth.getInstance().currentUser
