@@ -15,8 +15,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.example.posingottae.databinding.FragmentPoseBinding
-import com.example.posingottae.ui.poseanalysis.PictureFragment.PoseFrontTricepsFragment
-import org.checkerframework.checker.units.qual.C
 
 
 class PoseFragment : Fragment() {

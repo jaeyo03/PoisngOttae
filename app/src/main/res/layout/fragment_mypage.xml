@@ -55,4 +55,62 @@
             android:layout_marginTop="46dp"
             app:layout_constraintTop_toBottomOf="@+id/textViewUsername"
             android:onClick="onEditProfileButtonClick"/>
+
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editProfileBtn"
+        android:stretchColumns="*">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:id="@+id/text_pose_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Pose Name"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/text_left_arm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Left Arm"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/text_right_arm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Right Arm"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/text_left_leg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Left Leg"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/text_right_leg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Left Arm"
+                android:textSize="14sp" />
+
+        </TableRow>
+
+
+    </TableLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

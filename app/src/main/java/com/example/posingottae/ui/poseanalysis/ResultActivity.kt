@@ -10,7 +10,10 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import com.example.posingottae.MainActivity
+import com.example.posingottae.PoseRoomDB.PoseDB
+import com.example.posingottae.PoseRoomDB.PoseData
 import com.example.posingottae.R
 import com.example.posingottae.databinding.ActivityResultBinding
 import com.example.posingottae.ui.poseanalysis.PictureFragment.BlankFragment
@@ -24,16 +27,25 @@ import com.example.posingottae.ui.poseanalysis.PictureFragment.PoseFrontspreadFr
 import com.example.posingottae.ui.poseanalysis.PictureFragment.PoseMusFragment1
 import com.example.posingottae.ui.poseanalysis.PictureFragment.PoseMusFragment2
 import com.example.posingottae.ui.poseanalysis.PictureFragment.PoseSideFragment
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.io.IOException
 import kotlin.math.abs
 
 
 class ResultActivity : AppCompatActivity() {
     private lateinit var binding: ActivityResultBinding
+
+    private lateinit var poseDB : PoseDB
+    private val coroutineScope = CoroutineScope(Dispatchers.IO)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityResultBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        poseDB = PoseDB.getInstance(this)
 
 
 
@@ -117,6 +129,19 @@ class ResultActivity : AppCompatActivity() {
 
         ratingBar.rating = rating.toFloat()
 
+        binding.saveBtn.setOnClickListener {
+            coroutineScope.launch {
+                val pose = PoseData(
+                    poseName = poseInformation.toString(),
+                    userLeftArm = userLeftArm,
+                    userLeftLeg = userLeftLeg,
+                    userRightArm = userRightArm,
+                    userRightLeg = userRightLeg
+                )
+                poseDB.poseDataDao().insert(pose)
+            }
+            Toast.makeText(this@ResultActivity, "Save Complete!", Toast.LENGTH_SHORT).show()
+        }
 
         val backBtn = binding.backBtn
         backBtn.setOnClickListener {

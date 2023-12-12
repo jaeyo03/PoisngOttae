@@ -69,6 +69,8 @@ class MypageFragment : Fragment() {
             }
         }
 
+
+
         return view
     }
 
