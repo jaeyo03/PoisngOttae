@@ -2,23 +2,22 @@
 
 ## 🧑🏻‍💻Introduction
 - Mobile Posing Analytic Support App
-- 사진을 넣으면 실시간으로 분석해서 결과를 보여준다.
-</br>
+- When you upload a photo, it will analyze it in real-time and show you the results.
+  </br>
 
 ## 🎉Main features
-| Fragment       | explanation                                           |
-|----------------|-------------------------------------------------------|
-| App Opening    | 앱을 키면 앱로고가 Splash Activity를 통해 나온다.                   |
-| Signup,Login   | Firebase를 이용해 로그인을 구현하였다.                             |
-| HomeFragment   | 웹뷰를 이용하여 헬스 관련 사이트를 보여준다.                             |
-| PoseFragment   | 포즈를 선택하여 사용자의 포즈를 분석을 할 수 있다.                         |
-| MapFragment    | 실시간 위치를 추적하고 주변 헬스장의 정보를 보여준다.                        |
-| SocialFragment | 게시글을 올려 다른 사용자들이 확인 할 수 있게 한다.                        |
-| MypageFragment | 자신의 정보를 확인하고 수정 할 수 있다. 또한 자신이 수행했던 포즈 분석 결과들을 볼 수 있다. |
+| Fragment       | explanation                               |
+|----------------|-------------------------------------------|
+| Signup,Login   | We implemented login using Firebase. |
+| HomeFragment   | Use WebView to show health-related sites.                 |
+| PoseFragment   | Select Pose to analyze the user's pose.  |
+| MapFragment    | Shows information about nearby gyms.          |
+| SocialFragment | Publish the post so that other users can see it.  |
+| MypageFragment | You can view and edit your information.        |
 
 
-## 🔧기술
-- 프레임워크 및 라이브러리: Kotlin, MLKit, Firebase
+## 🔧Techniques
+- Frameworks and libraries: Kotlin, MLKit, Firebase, CameraX
 
 ### Firebase
 - Firebase Authentication
@@ -33,3 +32,35 @@
 - Preview
 - ImageCapture
 - ImageAnalysis
+
+
+## 🗂️상세 설명
+
+### 회원가입, 로그인
+- We implemented signup and login using Firebase Authentication.
+- When a user signs up, they fill in additional information in the Firestore so that it can be used or modified later.
+  use or modify later.
+- Enable auto-login.
+
+### Home
+- Show a health-related website using WebView.
+
+### Pose Analysis
+- ㅇㅇ
+
+### Map
+- By importing Naver API, it shows the information and location of gyms near your current location (Gongneung).
+
+### Post
+- You can create a post with a photo or just a post.
+- The post list shows the title, author, and photo preview.
+- Click on a post to view its details.
+- Click to see the title, author, content, and full-size photo.
+- Use Firestore (post text information) and Firebase Storage (post photos).
+
+### My Page
+- You can view and edit the personal information you filled out when you signed up.  
+- You can log out by pressing the 'Logout' button.
+- You can view your previous pose analysis results on your My Page.
+
+
