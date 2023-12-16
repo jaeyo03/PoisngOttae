@@ -36,7 +36,7 @@ class LocalNotificationManager(private val context: Context) {
             .setSmallIcon(R.drawable.posingottae)
             .setContentTitle("WoW you have great pose")
             .setContentText("You can check your pose, and share on Instagram!")
-            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .setPriority(NotificationCompat.PRIORITY_MAX)
             .setAutoCancel(true)  // 알림을 탭하면 자동으로 삭제되도록 설정
             .setContentIntent(getInstagramShareIntent(capturedImageUri))  // 탭 시의 동작 설정
             .build()

@@ -2,21 +2,31 @@ package com.example.posingottae.ui.mypage
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.view.Display
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TableRow
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.room.Room
+import com.example.posingottae.PoseRoomDB.PoseDB
+import com.example.posingottae.PoseRoomDB.PoseData
 import com.example.posingottae.R
 import com.example.posingottae.databinding.FragmentMypageBinding
 import com.example.posingottae.login.Login
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MypageFragment : Fragment() {
 
@@ -27,18 +37,60 @@ class MypageFragment : Fragment() {
     private lateinit var textViewUsername: TextView
     private lateinit var textViewEmail: TextView
     private lateinit var logoutButton: Button
+    private val coroutineScope = CoroutineScope(Dispatchers.IO)
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+
         _binding = FragmentMypageBinding.inflate(inflater, container, false)
         val view = binding.root
 
         textViewUsername = view.findViewById(R.id.textViewUsername)
         textViewEmail = view.findViewById(R.id.textViewEmail)
         logoutButton = view.findViewById(R.id.logoutBtn)
+
+        coroutineScope.launch {
+            val poses = withContext(Dispatchers.IO){
+                PoseDB.getInstance(requireContext()).poseDataDao().getAll()
+            }
+
+            for (pose in poses){
+                val tableRow = TableRow(requireContext())
+                // PoseName 추가
+                val poseNameTextView = TextView(requireContext())
+                poseNameTextView.text = pose.poseName
+                tableRow.addView(poseNameTextView)
+
+                // UserLeftArm 추가
+                val userLeftArmTextView = TextView(requireContext())
+                userLeftArmTextView.text = pose.userLeftArm.toString()
+                tableRow.addView(userLeftArmTextView)
+
+                // UserRightArm 추가
+                val userRightArmTextView = TextView(requireContext())
+                userRightArmTextView.text = pose.userRightArm.toString()
+                tableRow.addView(userRightArmTextView)
+
+                // UserLeftLeg 추가
+                val userLeftLegTextView = TextView(requireContext())
+                userLeftLegTextView.text = pose.userLeftLeg.toString()
+                tableRow.addView(userLeftLegTextView)
+
+                // UserRightLeg 추가
+                val userRightLegTextView = TextView(requireContext())
+                userRightLegTextView.text = pose.userRightLeg.toString()
+                tableRow.addView(userRightLegTextView)
+
+                // TableLayout에 TableRow 추가
+                binding.tablePose.addView(tableRow)
+            }
+
+        }
+
 
 
         fetchUserData()
@@ -73,8 +125,6 @@ class MypageFragment : Fragment() {
 
         return view
     }
-
-
 
     private fun fetchUserData() {
         val currentUser = FirebaseAuth.getInstance().currentUser
