@@ -1,26 +1,39 @@
 <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:orientation="horizontal"
+        android:padding="16dp"
+        tools:ignore="ExtraText">
 
-    <TextView
-            android:id="@+id/titleTextView"
-            android:layout_width="match_parent"
+    <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:textStyle="bold"/>
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginEnd="8dp"> <!-- 여백 조절 -->
 
-    <TextView
-            android:id="@+id/contentTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/titleTextView"
-            android:layout_marginTop="8dp"
-            android:text=""
-            android:textSize="16sp"/>
+        <TextView
+                android:id="@+id/titleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
 
-    <!-- 추가적인 정보를 표시할 뷰를 여기에 추가. -->
+        <TextView
+                android:id="@+id/contentTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text=""
+                android:textSize="16sp"/>
+    </LinearLayout>
 
+    <ImageView
+            android:id="@+id/postImageView"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"/>
 </LinearLayout>

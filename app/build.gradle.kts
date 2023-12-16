@@ -35,6 +35,7 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
+        freeCompilerArgs += listOf("-Xuse-ir")
     }
     buildFeatures {
         viewBinding = true
@@ -82,6 +83,9 @@ dependencies {
     implementation("com.google.firebase:firebase-auth-ktx")
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-core:21.1.1")
+    implementation("com.google.firebase:firebase-storage:20.3.0")
+    implementation("com.github.bumptech.glide:glide:4.12.0")
+
     // 구글 로그인 설정 - Jinsoo
     implementation("com.google.android.gms:play-services-auth:20.7.0")
 
