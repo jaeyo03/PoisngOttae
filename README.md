@@ -34,9 +34,9 @@
 - ImageAnalysis
 
 
-## 🗂️상세 설명
+## 🗂️Detailed Description
 
-### 회원가입, 로그인
+### Sign up, login
 - We implemented signup and login using Firebase Authentication.
 - When a user signs up, they fill in additional information in the Firestore so that it can be used or modified later.
   use or modify later.
