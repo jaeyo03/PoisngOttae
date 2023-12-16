@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.posingottae.R
 import com.example.posingottae.databinding.FragmentMapBinding
+import com.google.android.gms.location.LocationServices
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.CameraPosition
 import com.naver.maps.map.LocationTrackingMode
@@ -73,12 +74,14 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback {
         )
         naverMap.cameraPosition = cameraPosition
 
+
         //실시간 위치 마킹
         naverMap.addOnLocationChangeListener { location ->
             val currentLocate = Marker()
             currentLocate.icon = MarkerIcons.BLACK
             currentLocate.iconTintColor = Color.RED
-            currentLocate.position = LatLng(location.latitude,location.longitude)
+            currentLocate.position = LatLng(locationSource.lastLocation!!.latitude,
+                locationSource.lastLocation!!.longitude)
             currentLocate.captionText = "현위치"
             currentLocate.map = naverMap
         }
@@ -223,8 +226,9 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback {
 
         val uiSettings = naverMap.uiSettings
         uiSettings.isCompassEnabled = true
-        uiSettings.isLocationButtonEnabled =true //위치에서 뭘더 조정해야 제대로 작동..
+        uiSettings.isLocationButtonEnabled =true
         uiSettings.isScaleBarEnabled = true
+
     }
 
     override fun onCreateView(

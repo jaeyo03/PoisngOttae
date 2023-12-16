@@ -37,7 +37,6 @@ class MypageFragment : Fragment() {
     private lateinit var textViewUsername: TextView
     private lateinit var textViewEmail: TextView
     private lateinit var logoutButton: Button
-    private val coroutineScope = CoroutineScope(Dispatchers.IO)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,7 +52,7 @@ class MypageFragment : Fragment() {
         textViewEmail = view.findViewById(R.id.textViewEmail)
         logoutButton = view.findViewById(R.id.logoutBtn)
 
-        coroutineScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             val poses = withContext(Dispatchers.IO){
                 PoseDB.getInstance(requireContext()).poseDataDao().getAll()
             }
