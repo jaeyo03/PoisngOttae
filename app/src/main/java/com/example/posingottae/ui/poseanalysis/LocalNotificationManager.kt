@@ -33,7 +33,7 @@ class LocalNotificationManager(private val context: Context) {
 
     fun sendGoodPositionNotification() {
         val notification = NotificationCompat.Builder(context, channelId)
-            .setSmallIcon(R.drawable.posingottae)
+            .setSmallIcon(R.drawable.ic_posingottae_noti)
             .setContentTitle("WoW you have great pose")
             .setContentText("You can check your pose, and share on Instagram!")
             .setPriority(NotificationCompat.PRIORITY_MAX)
