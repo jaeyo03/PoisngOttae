@@ -6,10 +6,13 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.example.posingottae.R
 import com.example.posingottae.ui.socialmedia.BoardFragment.Companion.ARG_POST_CONTENT
+import com.example.posingottae.ui.socialmedia.BoardFragment.Companion.ARG_POST_IMAGE_URL
 import com.example.posingottae.ui.socialmedia.BoardFragment.Companion.ARG_POST_TITLE
 
 
@@ -48,14 +51,24 @@ class PostDetailFragment : Fragment() {
 
         val textViewTitle = view.findViewById<TextView>(R.id.textViewPostTitle)
         val textViewContent = view.findViewById<TextView>(R.id.textViewPostContent)
+        val imageView = view.findViewById<ImageView>(R.id.imageViewPost)
 
         // arguments에서 데이터 가져오기
         val postTitle = arguments?.getString(ARG_POST_TITLE)
         val postContent = arguments?.getString(ARG_POST_CONTENT)
+        // 이미지 url 표시
+        val postImageUrl = arguments?.getString(ARG_POST_IMAGE_URL)
+        val imageViewPost = view.findViewById<ImageView>(R.id.imageViewPost)
 
         // 가져온 데이터를 뷰에 설정
         textViewTitle.text = postTitle
         textViewContent.text = postContent
+
+        if (!postImageUrl.isNullOrEmpty()) {
+            Glide.with(requireContext())
+                .load(postImageUrl)
+                .into(imageViewPost)
+        }
     }
 
 }

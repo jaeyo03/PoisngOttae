@@ -25,6 +25,14 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"/>
 
+    <ImageView
+            android:id="@+id/imageViewPost"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"/>
+
     <!-- 이후에 댓글이나 다른 정보를 표시할 수 있는 View를 추가할 수 있습니다. -->
 
 </LinearLayout>

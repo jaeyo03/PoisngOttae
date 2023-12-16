@@ -28,10 +28,16 @@
             android:hint="내용"/>
 
     <Button
+            android:id="@+id/buttonSelectImage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="이미지 있는 게시글 작성"/>
+
+    <Button
             android:id="@+id/buttonAddPost"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="게시글 작성"/>
+            android:text="텍스트 게시글 작성"/>
 
     <TextView
             android:text="결과"
