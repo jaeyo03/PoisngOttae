@@ -141,20 +141,20 @@ class CameraActivity : AppCompatActivity() {
                 PoseLandmark.LEFT_WRIST,
                 PoseLandmark.LEFT_ELBOW,
                 PoseLandmark.LEFT_SHOULDER,
-                70.0
+                73.0
             ),
             PoseAnalysis.TargetShape(
                 PoseLandmark.RIGHT_ANKLE,
                 PoseLandmark.RIGHT_KNEE,
                 PoseLandmark.RIGHT_HIP,
-                180.0
+                177.0
             )
             ,
             PoseAnalysis.TargetShape(
                 PoseLandmark.RIGHT_WRIST,
                 PoseLandmark.RIGHT_ELBOW,
                 PoseLandmark.RIGHT_SHOULDER,
-                55.0
+                63.0
             )
         )
     )
