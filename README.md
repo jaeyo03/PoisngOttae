@@ -46,10 +46,12 @@
 - Show a health-related website using WebView.
 
 ### Pose Analysis
-- ㅇㅇ
+- Choose the pose you want to follow. Then you can shoot your pose with the camera. Or you can get a photo from the gallery.
+- Then you will have your angle for you pose. The app will compare your angles with the answer pose.
+- Also, you can have real time analysis of your pose. In real time analysis, it automatically capture your pose and show your result.
 
 ### Map
-- By importing Naver API, it shows the information and location of gyms near your current location (Gongneung).
+- By importing Naver API, it shows the information and location of gyms near your current location (Seoultech).
 
 ### Post
 - You can create a post with a photo or just a post.
