@@ -46,7 +46,7 @@
 ### RoomDB
 
 ### Sensor
-- shaking to open camera
+- Shaking to open camera
 
 ### Notification
 - Auto Notification
