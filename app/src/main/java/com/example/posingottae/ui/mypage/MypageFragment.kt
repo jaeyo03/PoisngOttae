@@ -37,7 +37,6 @@ class MypageFragment : Fragment() {
     private lateinit var textViewUsername: TextView
     private lateinit var textViewEmail: TextView
     private lateinit var logoutButton: Button
-    private val coroutineScope = CoroutineScope(Dispatchers.IO)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,7 +52,7 @@ class MypageFragment : Fragment() {
         textViewEmail = view.findViewById(R.id.textViewEmail)
         logoutButton = view.findViewById(R.id.logoutBtn)
 
-        coroutineScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             val poses = withContext(Dispatchers.IO){
                 PoseDB.getInstance(requireContext()).poseDataDao().getAll()
             }
@@ -67,22 +66,22 @@ class MypageFragment : Fragment() {
 
                 // UserLeftArm 추가
                 val userLeftArmTextView = TextView(requireContext())
-                userLeftArmTextView.text = pose.userLeftArm.toString()
+                userLeftArmTextView.text= String.format("%.4f",pose.userLeftArm)
                 tableRow.addView(userLeftArmTextView)
 
                 // UserRightArm 추가
                 val userRightArmTextView = TextView(requireContext())
-                userRightArmTextView.text = pose.userRightArm.toString()
+                userRightArmTextView.text = String.format("%.4f",pose.userRightArm)
                 tableRow.addView(userRightArmTextView)
 
                 // UserLeftLeg 추가
                 val userLeftLegTextView = TextView(requireContext())
-                userLeftLegTextView.text = pose.userLeftLeg.toString()
+                userLeftLegTextView.text = String.format("%.4f",pose.userLeftLeg)
                 tableRow.addView(userLeftLegTextView)
 
                 // UserRightLeg 추가
                 val userRightLegTextView = TextView(requireContext())
-                userRightLegTextView.text = pose.userRightLeg.toString()
+                userRightLegTextView.text = String.format("%.4f",pose.userRightLeg)
                 tableRow.addView(userRightLegTextView)
 
                 // TableLayout에 TableRow 추가

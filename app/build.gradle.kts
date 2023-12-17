@@ -1,11 +1,9 @@
-import org.jetbrains.kotlin.config.JvmAnalysisFlags.useIR
-
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("com.google.gms.google-services")
     kotlin("plugin.serialization")
-    
+    id("kotlin-kapt")
 }
 
 android {
@@ -113,4 +111,10 @@ dependencies {
 
     //게시판 용 파이어베이스
     implementation("com.google.firebase:firebase-firestore-ktx:24.9.1")
+
+    //Room DB
+    implementation("androidx.room:room-runtime:2.6.1")
+    kapt("androidx.room:room-compiler:2.6.1")
+
+    implementation("com.github.bumptech.glide:glide:4.12.0")
 }
