@@ -110,7 +110,7 @@
 - Pose analysis
 - Notification
 
-### Jinsoo Park  Github : 
+### Jinsoo Park  Github : jinny908
 - UI/UX
 - Login/Signup
 - Post Board
