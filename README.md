@@ -94,7 +94,27 @@
 ### ChatBot
 - User can ask information about chicken breast or anything user want. It takes the text that the user entered and passes it to the KoGPT API, receives API responses and displays it on the UI. 
 
-  
 
+## 🧑‍💻Role
+### Jaeyoung Kim Github: jaeyo03
+- UI/UX
+- Login/Signup
+- Pose analysis
+- Near Gym
+- Post Board
+
+### Eonseon Park Github: eonpark
+- UI/UX
+- Splash
+- Chatbot
+- Pose analysis
+- Notification
+
+### Jinsoo Park  Github : 
+- UI/UX
+- Login/Signup
+- Post Board
+- Mypage 
+- Near Gym
 
 
