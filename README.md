@@ -96,21 +96,21 @@
 
 
 ## 🧑‍💻Role
-### Jaeyoung Kim Github: jaeyo03
+### Jaeyoung Kim   Github : jaeyo03
 - UI/UX
 - Login/Signup
 - Pose analysis
 - Near Gym
 - Post Board
 
-### Eonseon Park Github: eonpark
+### Eonseon Park   Github : eonpark
 - UI/UX
 - Splash
 - Chatbot
 - Pose analysis
 - Notification
 
-### Jinsoo Park  Github : jinny908
+### Jinsoo Park    Github : jinny908
 - UI/UX
 - Login/Signup
 - Post Board
