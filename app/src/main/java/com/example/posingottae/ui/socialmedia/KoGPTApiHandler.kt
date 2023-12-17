@@ -17,7 +17,7 @@ class KoGPTApiHandler (private val apiKey: String)  {
         val url = "https://api.kakaobrain.com/v1/inference/kogpt/generation"
         val headers = mapOf("Authorization" to "KakaoAK $apiKey")
 
-        val body = KoGPTApiRequest( prompt, max_tokens =120)
+        val body = KoGPTApiRequest( prompt, max_tokens =128, temperature = 0.2)
         val (_, _, result) = Fuel.post(url)
             .header(headers)
             .jsonBody(json.encodeToString(body))
@@ -30,4 +30,5 @@ class KoGPTApiHandler (private val apiKey: String)  {
 @Serializable
 data class KoGPTApiRequest(
     val prompt: String,
-    val max_tokens: Int )
+    val max_tokens: Int,
+    val temperature: Double)
