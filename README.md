@@ -17,7 +17,7 @@
 
 
 ## 🔧Techniques
-- Frameworks and libraries: Kotlin, MLKit, Firebase, CameraX
+- Frameworks and libraries: Kotlin, MLKit, Firebase, CameraX, Fuel, KoGPT API, Naver Map API, RoomDB, Sensor, Notification
 
 ### Firebase
 - Firebase Authentication
@@ -33,8 +33,29 @@
 - ImageCapture
 - ImageAnalysis
 
+### Fuel
+- Chatbot
+- HTTP networking
+
+### KoGPT API
+- Chatbot
+
+### Naver Map API
+- Near Gym
+
+### RoomDB
+
+### Sensor
+- shaking to open camera
+
+### Notification
+- Auto Notification
+
+
 
 ## 🗂️Detailed Description
+### Splash Activity
+- We implement When the user starts the app, the splash activity will display the app icon.
 
 ### Sign up, login
 - We implemented signup and login using Firebase Authentication.
@@ -44,11 +65,16 @@
 
 ### Home
 - Show a health-related website using WebView.
+- When user shaking phone, sensor detected and open camera.
 
 ### Pose Analysis
 - Choose the pose you want to follow. Then you can shoot your pose with the camera. Or you can get a photo from the gallery.
 - Then you will have your angle for you pose. The app will compare your angles with the answer pose.
 - Also, you can have real time analysis of your pose. In real time analysis, it automatically capture your pose and show your result.
+
+### Notification
+- If the results of the analysis in the Pose analysis match with the best posing we have written, the push notification has been implemented automatically.
+- This push notification contains the Posingottae icon, app name, and text. When user pressed, the push notification disappears and performs activities that connect to Instagram.
 
 ### Map
 - By importing Naver API, it shows the information and location of gyms near your current location (Seoultech).
@@ -64,5 +90,11 @@
 - You can view and edit the personal information you filled out when you signed up.  
 - You can log out by pressing the 'Logout' button.
 - You can view your previous pose analysis results on your My Page.
+
+### ChatBot
+- User can ask information about chicken breast or anything user want. It takes the text that the user entered and passes it to the KoGPT API, receives API responses and displays it on the UI. 
+
+  
+
 
 
