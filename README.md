@@ -1,28 +1,34 @@
-# Mobile Programming Team Project - PosingOttae
+# 모바일 프로그래밍 팀 프로젝트 - 포징어때
 
 ## 🧑🏻‍💻Introduction
-- Mobile Posing Analytic Support App
-- When you upload a photo, it will analyze it in real-time and show you the results.
+- 바디빌딩 포즈 분석 앱
+- 포즈 사진을 업로드하면, 분석 결과를 보여줍니다!
   </br>
 
-## 🎉Main features
+## 🎉주요기능
 | Fragment       | explanation                               |
 |----------------|-------------------------------------------|
-| Signup,Login   | We implemented login using Firebase. |
-| HomeFragment   | Use WebView to show health-related sites.                 |
-| PoseFragment   | Select Pose to analyze the user's pose.  |
-| MapFragment    | Shows information about nearby gyms.          |
-| SocialFragment | Publish the post so that other users can see it.  |
-| MypageFragment | You can view and edit your information.        |
+| Signup,Login   | Firebase를 사용하여 로그인 기능을 구현했습니다. |
+| HomeFragment   | WebView를 사용하여 바디빌딩 관련 웹 사이트를 보여줍니다.                |
+| PoseFragment   | 따라하고 싶은 바디빌딩 포즈를 선택합니다.  |
+| MapFragment    | 사용자 주변에 위치한 헬스장을 보여줍니다.          |
+| SocialFragment | 다른 사용자들이 볼 수 있도록 게시글을 작성합니다.  |
+| MypageFragment | 사용자 정보를 조회하고 편집할 수 있습니다.        |
 
+![image](https://github.com/jaeyo03/PosingOttae/assets/137462767/261b1297-2f68-4b1d-96f1-927e5fb1174b)
 
 ## 🔧Techniques
-- Frameworks and libraries: Kotlin, MLKit, Firebase, CameraX, Fuel, KoGPT API, Naver Map API, RoomDB, Sensor, Notification
 
+![image](https://github.com/jaeyo03/PosingOttae/assets/137462767/ad5b3850-ee04-4d56-8f7d-d79fd4e33342)
+
+![image](https://github.com/jaeyo03/PosingOttae/assets/137462767/478fa7fd-5f1f-469a-bff5-48de5f5bf14e)
+
+- 프레임워크 및 라이브러리: Kotlin, MLKit, Firebase, CameraX, Fuel, KoGPT API, 네이버 맵 API, RoomDB, 센서, 앱 알림
+  
 ### Firebase
-- Firebase Authentication
+- Firebase 인증
 - Firestore
-- Firebase Storage
+- Firebase 스토리지
 
 ### MLKit
 - Pose-Detection
@@ -34,68 +40,71 @@
 - ImageAnalysis
 
 ### Fuel
-- Chatbot
-- HTTP networking
+- 챗봇
+- HTTP 네트워크
 
 ### KoGPT API
-- Chatbot
-
+- 챗봇
+  
 ### Naver Map API
-- Near Gym
 
 ### RoomDB
+- 사용자의 포즈 분석 정보 저장
 
-### Sensor
-- Shaking to open camera
+### 센서
+- 흔들림을 감지하는 가속도 센서
 
-### Notification
-- Auto Notification
-
+### 앱 알림
 
 
-## 🗂️Detailed Description
+## 🗂️상세 설명
 ### Splash Activity
-- We implement When the user starts the app, the splash activity will display the app icon.
+- 사용자가 앱을 시작할때, 앱 아이콘을 표시합니다.
 
 ### Sign up, login
-- We implemented signup and login using Firebase Authentication.
-- When a user signs up, they fill in additional information in the Firestore so that it can be used or modified later.
-  use or modify later.
-- Enable auto-login.
+- Firebase 인증을 사용하여 회원가입과 로그인을 구현했습니다.
+- 사용자가 회원가입을 할 때, 추가 정보를 Firestore에 저장합니다.
+- 사용자 정보는 나중에 사용하거나 수정할 수 있습니다.
+- 자동 로그인 기능을 지원합니다.
 
 ### Home
-- Show a health-related website using WebView.
-- When user shaking phone, sensor detected and open camera.
+- WebView를 사용하여 바디빌딩 관련 웹 사이트를 표시합니다.
+- 사용자가 휴대폰을 흔들면 가속도센서가 감지되고 카메라가 열립니다.
 
 ### Pose Analysis
-- Choose the pose you want to follow. Then you can shoot your pose with the camera. Or you can get a photo from the gallery.
-- Then you will have your angle for you pose. The app will compare your angles with the answer pose.
-- Also, you can have real time analysis of your pose. In real time analysis, it automatically capture your pose and show your result.
+- 따라하고 싶은 포즈를 선택합니다. 그런 다음 카메라로 포즈를 찍거나 갤러리에서 사진을 가져올 수 있습니다.
+- 앱은 사용자의 포즈에서 각도를 계산하고 이를 정답 포즈와 비교합니다.
+- 실시간 분석에서는 자동으로 사용자의 포즈를 캡처하고 결과를 보여줍니다.
 
 ### Notification
-- If the results of the analysis in the Pose analysis match with the best posing we have written, the push notification has been implemented automatically.
-- This push notification contains the Posingottae icon, app name, and text. When user pressed, the push notification disappears and performs activities that connect to Instagram.
+- 포즈 분석 결과가 정답 포즈와 일치하면, 푸시 알림이 옵니다.
+- 이 푸시 알림에는 포징어때 아이콘, 앱 이름, 텍스트가 포함됩니다. 사용자가 푸시 알림을 누르면 인스타그램으로 연결됩니다.
 
 ### Map
-- By importing Naver API, it shows the information and location of gyms near your current location (Seoultech).
+- 네이버 API를 도입하여 현재 위치(서울과학기술대학교) 근처의 헬스장 정보를 보여줍니다.
 
 ### Post
-- You can create a post with a photo or just a post.
-- The post list shows the title, author, and photo preview.
-- Click on a post to view its details.
-- Click to see the title, author, content, and full-size photo.
-- Use Firestore (post text information) and Firebase Storage (post photos).
+- 사진이 포함된 게시글이나 텍스트만 있는 게시글을 생성할 수 있습니다.
+- 게시글 목록에는 제목, 글쓴이, 사진 미리보기가 표시됩니다.
+- 게시글을 클릭하면 상세 정보를 볼 수 있습니다.
+- 제목, 글쓴이, 내용, 사진을 볼 수 있습니다.
 
 ### My Page
-- You can view and edit the personal information you filled out when you signed up.  
-- You can log out by pressing the 'Logout' button.
-- You can view your previous pose analysis results on your My Page.
+- 가입할 때 작성한 개인정보를 조회하고 편집할 수 있습니다.
+- '로그아웃' 버튼을 눌러 로그아웃할 수 있습니다.
+- MyPage에서 이전에 진행했던 포즈 분석 결과를 볼 수 있습니다.
 
 ### ChatBot
-- User can ask information about chicken breast or anything user want. It takes the text that the user entered and passes it to the KoGPT API, receives API responses and displays it on the UI. 
+- 사용자가 입력한 텍스트를 KoGPT API로 전송하고, API 응답을 받아 UI에 표시합니다.
 
+## 📱핵심 기능 캡쳐 화면
+![image](https://github.com/jaeyo03/PosingOttae/assets/137462767/3c7d6dc4-eac7-4dba-a33a-118610d37ac1)
 
-## 🧑‍💻Role
+![image](https://github.com/jaeyo03/PosingOttae/assets/137462767/3946447f-c979-4db9-9f0b-44d3c5f39cb5)
+
+![image](https://github.com/jaeyo03/PosingOttae/assets/137462767/0c37ea45-87ad-4f11-9334-38a5c9bd8094)
+
+## 🧑‍💻역할
 ### Jaeyoung Kim   Github : jaeyo03
 - UI/UX
 - Login/Signup
@@ -117,4 +126,8 @@
 - Mypage 
 - Near Gym
 
-
+## 🤔아쉬운 점
+- 개발 시작 전 프로젝트의 기능적 요구사항을 잘 정의했다. 하지만 정해진 기간 내에 기능 개발만 완료할 수 있었다. 때문에 컴포넌트나 UI,UX에 대한 고민을 하지 못했다.
+- 팀원들끼리 정해진 규칙 없이 각자의 방식대로 개발하여 시간이 지체됐다.
+- 각 기능들이 전체적으로 연결되어 유기성을 가진다는 느낌이 부족했다.
+  
