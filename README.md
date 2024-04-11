@@ -15,14 +15,7 @@
 | SocialFragment | 다른 사용자들이 볼 수 있도록 게시글을 작성합니다.  |
 | MypageFragment | 사용자 정보를 조회하고 편집할 수 있습니다.        |
 
-![image](https://github.com/jaeyo03/PosingOttae/assets/137462767/261b1297-2f68-4b1d-96f1-927e5fb1174b)
-
 ## 🔧아키텍처 및 기술
-
-![image](https://github.com/jaeyo03/PosingOttae/assets/137462767/ad5b3850-ee04-4d56-8f7d-d79fd4e33342)
-
-![image](https://github.com/jaeyo03/PosingOttae/assets/137462767/478fa7fd-5f1f-469a-bff5-48de5f5bf14e)
-
 - 프레임워크 및 라이브러리: Kotlin, MLKit, Firebase, CameraX, Fuel, KoGPT API, 네이버 맵 API, RoomDB, 센서, 앱 알림
   
 ### Firebase
