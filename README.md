@@ -91,6 +91,8 @@
 - 사용자가 입력한 텍스트를 KoGPT API로 전송하고, API 응답을 받아 UI에 표시합니다.
 
 ## 📱핵심 기능 캡쳐 화면
+<img width="1921" alt="스크린샷 2024-04-15 오전 1 32 28" src="https://github.com/jaeyo03/PosingOttae/assets/137462767/24c30c2d-a94d-425f-9648-9647a816091b">
+<img width="1921" alt="스크린샷 2024-04-15 오전 1 32 41" src="https://github.com/jaeyo03/PosingOttae/assets/137462767/43ac04ca-f195-4a62-a676-eabaa1e500d1">
 
 ## 🧑‍💻역할
 ### Jaeyoung Kim   Github : jaeyo03
